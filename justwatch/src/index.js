@@ -13,13 +13,14 @@ import reportWebVitals from './reportWebVitals';
 import Movieselection from './Screens/Movieselection';
 import Profile from './Screens/Profile';
 import NavBar from './Components/NavBarComponent';
+import InitialScreen from './Screens/InitialScreen';
 
 ReactDOM.render(
   <React.StrictMode>
-    <NavBar/>
     <Router>
+      <NavBar/>
       <Routes>
-        <Route path="/" element={<App />} />
+        <Route path="/" element={<InitialScreen />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/movieselection" element={<Movieselection />} />

@@ -1,7 +1,10 @@
 import React from 'react';
 import './NavBarComponent.css';
+import { useNavigate } from 'react-router-dom';
 
 function NavBar() {
+
+    const navigator = useNavigate();
 
     function GoToProfile() {
 
@@ -12,7 +15,7 @@ function NavBar() {
     }
 
     function GoToProfile() {
-        
+        navigator('/profile');
     }
 
     function GoToMovieSelection() {
