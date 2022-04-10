@@ -6,14 +6,20 @@ function Movieselection() {
   const likeMovie = null;
   const dislikeMovie = null;
   const superlikeMovie = null;
+  const ReturnButton = null;
+  const GoToProfile = null;
+  const GoToGroups = null;
 
   return (
     <div className="div">
-      <div className="div-2">
-        <div className="div-2-text">
+      <div className="titleBar">
+        <div className="titleText">
           JustWatch
         </div>
       </div>
+      <button className="returnButton" type="submit" onClick={ReturnButton}>Return</button>
+      <button className="profileButton" type="submit" onClick={GoToProfile}>Profile</button>
+      <button className="groupButton" type="submit" onClick={GoToGroups}>Groups</button>
       <div className="div-3">
         <div className="builder-columns div-4">
           <div className="builder-column column">
