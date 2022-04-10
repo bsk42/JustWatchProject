@@ -1,0 +1,42 @@
+.titleBar {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    position: absolute;
+    left: 1.68%;
+    right: 0.81%;
+    top: 0.9%;
+    bottom: 89.35%;
+
+    background: #FF296D;
+    border-radius: 34px;
+  }
+  .titleText {
+    text-align: center;
+    padding: 10px;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    font-family: 'Lato';
+    font-style: bold;
+    font-size: 48px;
+    color: #FFFFFF;
+  }
+  .returnButton{
+    position: absolute;
+    left: 5%;
+    top: 4.5%;
+  }
+  .profileButton{
+    position: absolute;
+    right: 10%;
+    top: 4.5%;
+  }
+  .groupButton{
+    position: absolute;
+    right: 5%;
+    top: 4.5%;
+  }

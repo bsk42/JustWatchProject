@@ -1,0 +1,41 @@
+.Profile {
+  text-align: center;
+}
+
+.Profile-logo {
+  height: 30vmin;
+  pointer-events: none;
+}
+
+.Profile-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.Profile-link {
+  color: #61dafb;
+}
+
+p { margin:0 }
+
+h4 { margin:0 }
+
+button {
+  background:    #c00;
+  background:    -webkit-linear-gradient(#c00, #600);
+  background:    linear-gradient(#c00, #600);
+  border-radius: 100px;
+  color:         #f6f4f4;
+  padding:       10px 100px;
+  font:          normal 700 24px/1 "Open Sans", sans-serif;
+  text-align:    center;
+  text-shadow:   1px 1px 0 #000;
+  margin-top:10px;
+}
+
