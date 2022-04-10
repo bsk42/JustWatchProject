@@ -1,12 +1,13 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
 import './Movieselection.css';
+import {GetMovieInfoById} from '../Services/MovieService.js';
 
 function Movieselection() {
 
-  const likeMovie = null;
   const dislikeMovie = null;
   const superlikeMovie = null;
+  const movies = ["tt1877830","tt2463208","tt13403046","tt3581652"];
 
   const sampleMovie = {
     title: "Borat",
@@ -18,8 +19,14 @@ function Movieselection() {
   }
 
   const [currentMovie, setCurrentMovie] = useState(sampleMovie);
+  const [count,setCount] = useState(0);
 
 
+  async function likeMovie() {
+    setCount(count + 1);
+    console.log(count);
+    await setCurrentMovie( await GetMovieInfoById(movies[count]));
+  }
 
   return (
     <div className="div">
@@ -49,7 +56,7 @@ function Movieselection() {
         <div className="div-11">Trailer</div>
         <div className="div-12">
           <div className="trailer">
-          <iframe src={currentMovie.trailer}  title="Trailer" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true" frameborder="no" scrolling="no">
+          <iframe src={currentMovie.trailer}  title="Trailer" allowFullScreen="true" mozallowfullscreen="true" webkitallowfullscreen="true" frameBorder="no" scrolling="no">
 
           </iframe>
             <div className="builder-image-sizer image-sizer-2" />
