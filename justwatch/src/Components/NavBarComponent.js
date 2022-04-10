@@ -11,7 +11,7 @@ function NavBar() {
     }
 
     function Logout() {
-        
+        navigator('/');
     }
 
     function GoToProfile() {
@@ -19,7 +19,7 @@ function NavBar() {
     }
 
     function GoToMovieSelection() {
-        
+        navigator('/movieselection')
     }
 
     return (
@@ -27,9 +27,9 @@ function NavBar() {
         <div className="titleText">
         JustWatch
         </div>
-        <button className="returnButton" type="submit" onClick={Logout}>Return</button>
+        <button className="logoutButton" type="submit" onClick={Logout}>Logout</button>
         <button className="profileButton" type="submit" onClick={GoToProfile}>Profile</button>
-        <button className="groupButton" type="submit" onClick={GoToMovieSelection}>Groups</button>
+        <button className="movieSelectionButton" type="submit" onClick={GoToMovieSelection}>Movie Selection</button>
 </div>
 
 

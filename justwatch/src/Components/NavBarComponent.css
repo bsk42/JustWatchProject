@@ -25,18 +25,18 @@
     font-size: 48px;
     color: #FFFFFF;
   }
-  .returnButton{
+  .logoutButton{
     position: absolute;
     left: 5%;
     top: 4.5%;
   }
   .profileButton{
     position: absolute;
-    right: 10%;
+    right: 5%;
     top: 4.5%;
   }
-  .groupButton{
+  .movieSelectionButton{
     position: absolute;
-    right: 5%;
+    right: 25%;
     top: 4.5%;
   }
