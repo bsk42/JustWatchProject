@@ -1,12 +1,16 @@
 import React from 'react';
 import './App.css';
+import NavBar from './Components/NavBarComponent';
 //import Movieselection from './Movieselection';
-import InitialScreen from './InitialScreen';
+import InitialScreen from './Screens/InitialScreen';
 
 function App() {
   // const navigate = useNavigate();
   return (
-    <InitialScreen />
+    <div>
+      <NavBar/>
+      <InitialScreen />
+    </div>
   );
 }
 
