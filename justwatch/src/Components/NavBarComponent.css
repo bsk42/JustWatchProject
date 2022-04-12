@@ -29,14 +29,23 @@
     position: absolute;
     left: 5%;
     top: 4.5%;
+    padding: 7px;
   }
   .profileButton{
     position: absolute;
     right: 5%;
     top: 4.5%;
+    padding: 7px;
   }
   .movieSelectionButton{
     position: absolute;
+    left: 25%;
+    top: 4.5%;
+    padding: 7px;
+  }
+  .groupsButton{
+    position: absolute;
     right: 25%;
     top: 4.5%;
+    padding: 7px;
   }

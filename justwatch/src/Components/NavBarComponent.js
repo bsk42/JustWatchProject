@@ -6,10 +6,6 @@ function NavBar() {
 
     const navigator = useNavigate();
 
-    function GoToProfile() {
-
-    }
-
     function Logout() {
         navigator('/');
     }
@@ -22,6 +18,10 @@ function NavBar() {
         navigator('/movieselection')
     }
 
+    function GoToGroups() {
+        navigator('/groups')
+    }
+
     return (
         <div className="titleBar">
         <div className="titleText">
@@ -30,6 +30,7 @@ function NavBar() {
         <button className="logoutButton" type="submit" onClick={Logout}>Logout</button>
         <button className="profileButton" type="submit" onClick={GoToProfile}>Profile</button>
         <button className="movieSelectionButton" type="submit" onClick={GoToMovieSelection}>Movie Selection</button>
+        <button className="groupsButton" type="submit" onClick={GoToGroups}>Groups</button>
 </div>
 
 

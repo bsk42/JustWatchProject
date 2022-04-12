@@ -1,0 +1,35 @@
+.div {
+    background-color: rgba(1, 1, 42, 1);
+  }
+  .groupBox {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    position: absolute;
+    left: 25%;
+    right: 25%;
+    top: 25%;
+    height: 200px;
+
+    background: #FF296D;
+    border-radius: 34px;
+  }
+  .groupText {
+    text-align: center;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    font-family: 'Lato';
+    font-style: bold;
+    font-size: 48px;
+    color: #FFFFFF;
+  }
+  .messageGroupButton{
+    position: absolute;
+    left: 60%;
+    top: 25%;
+    padding: 7px;
+  }

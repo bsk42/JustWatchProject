@@ -4,21 +4,11 @@ import './Messaging.css';
 
 function Messaging() {
   const SendMessage = null;
-  const ReturnButton = null;
-  const GoToProfile = null;
-  const GoToGroups = null;
   const textMessage = null;
 
   return (
     <div className="div">
-      <div className="titleBar">
-        <div className="titleText">
-          JustWatch
-        </div>
-      </div>
-      <button className="returnButton" type="submit" onClick={ReturnButton}>Return</button>
-      <button className="profileButton" type="submit" onClick={GoToProfile}>Profile</button>
-      <button className="groupButton" type="submit" onClick={GoToGroups}>Groups</button>
+      
       <div className="chat">
         <div className="yours messages">
           <div className="message last">

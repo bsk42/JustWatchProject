@@ -14,6 +14,9 @@ import Movieselection from './Screens/Movieselection';
 import Profile from './Screens/Profile';
 import NavBar from './Components/NavBarComponent';
 import InitialScreen from './Screens/InitialScreen';
+import Groups from './Screens/Groups';
+import Messaging from './Screens/Messaging';
+
 
 ReactDOM.render(
   <React.StrictMode>
@@ -25,6 +28,8 @@ ReactDOM.render(
         <Route path="/register" element={<Register />} />
         <Route path="/movieselection" element={<Movieselection />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/groups" element={<Groups />} />
+        <Route path="/messaging" element={<Messaging />} />
       </Routes>
     </Router>
   </React.StrictMode>,
