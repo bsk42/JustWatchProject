@@ -2,7 +2,11 @@ import face from '../Assets/Face.jpg';
 import './Profile.css';
 import TagsInput from "../Components/TagsInput"
 
-function Profile() {
+function Profile({ name, username, genre, streamingServices}) {
+
+    genre = ["comedy"];
+    streamingServices = ["netflix"];
+
   return (
     <div className="Profile">
       <header className="Profile-header">
@@ -11,19 +15,19 @@ function Profile() {
           Profile
         </h1>
         <h4>
-        	Name: Test Name
+        	Name: {name}
         </h4>
         <h4>
-        	Username: test
+        	Username: {username}
         </h4>
         <p>
-        	Genre:
+        	Genre: 
         </p>
-        <TagsInput />
+        <TagsInput existingTags = {genre} />
         <p>
         	Streaming Services:
         </p>
-        <TagsInput />
+        <TagsInput existingTags={streamingServices} />
         <button>
 		  Back
 	  	</button>
