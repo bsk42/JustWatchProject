@@ -8,7 +8,6 @@ function App() {
   // const navigate = useNavigate();
   return (
     <div>
-      <NavBar/>
       <InitialScreen />
     </div>
   );

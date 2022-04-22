@@ -215,10 +215,9 @@
           padding-right: 10px;
           padding-left: 10px;
         }
-        .screen-shot-2022-02-23-at-3-16 {
-          display: flex;
+        .trailer {
           width: 375px;
-          height: 215px;
+          height: 315px;
           border-radius: 13px;
           flex-direction: column;
         }
