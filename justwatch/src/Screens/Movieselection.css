@@ -28,25 +28,11 @@
           font-size: 48px;
           color: #FFFFFF;
         }
-        .returnButton{
-          position: absolute;
-          left: 5%;
-          top: 4.5%;
-        }
-        .profileButton{
-          position: absolute;
-          right: 10%;
-          top: 4.5%;
-        }
-        .groupButton{
-          position: absolute;
-          right: 5%;
-          top: 4.5%;
-        }
+
         .div-3 {
           display: flex;
           flex-direction: column;
-          max-width: 467px;
+          width: 867px;
           justify-content: flex-start;
           align-items: flex-start;
           border-radius: 15px;
@@ -94,7 +80,6 @@
           text-align: left;
         }
         .borat-2006-adventure-1-h-24 {
-          max-width: 415px;
           color: rgba(255, 255, 255, 1);
           letter-spacing: 0%;
           text-align: left;
@@ -216,8 +201,8 @@
           padding-left: 10px;
         }
         .trailer {
-          width: 375px;
-          height: 315px;
+          width: 800px;
+          height: 415px;
           border-radius: 13px;
           flex-direction: column;
         }
