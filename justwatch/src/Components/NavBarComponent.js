@@ -22,6 +22,10 @@ function NavBar() {
         navigator('/groups')
     }
 
+    function GoToFriends() {
+        navigator('/friends')
+    }
+
     return (
         <div className="titleBar">
         <div className="titleText">
@@ -31,6 +35,7 @@ function NavBar() {
         <button className="profileButton" type="submit" onClick={GoToProfile}>Profile</button>
         <button className="movieSelectionButton" type="submit" onClick={GoToMovieSelection}>Movie Selection</button>
         <button className="groupsButton" type="submit" onClick={GoToGroups}>Groups</button>
+        <button className="friendsButton" type="submit" onClick={GoToFriends}>Friends</button>
 </div>
 
 
