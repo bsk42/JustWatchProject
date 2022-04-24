@@ -1,4 +1,7 @@
-.photo {
+.div {
+  background-color: rgba(1, 1, 42, 1);
+}
+  .photo {
     height: 80px;
     width: 80px;
   }
@@ -11,8 +14,8 @@
   }
   .users-container {
     background-color: #ffffff;
-    width: 65%;
-    padding: 20px 0;
+    width: 75%;
+    padding: 10px 0;
   }
   .user {
     display: flex;
@@ -80,4 +83,9 @@
     height: 400px;
     right: 5%;
     width: 300px;
+  }
+  .messageButton {
+    position: absolute;
+    padding: 7px;
+    left: 100%;
   }

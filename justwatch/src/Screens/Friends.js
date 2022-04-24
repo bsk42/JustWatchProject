@@ -66,29 +66,31 @@ function Friends() {
     };
 
     return (
-        <div className="users">
-            <div className="users-container"> 
-                <ul>
-                    { dummyUsers.map(user => 
-                        <li key={user.id} className="user">
-                            <picture className="user-picture">
-                                <img src={user.photoUrl} alt={`${user.name}`} className ="photo" />
-                            </picture>
-                            <div className="user-info-container">
-                                <div className="user-info">
-                                    <h4>{user.name}</h4>
-                                    <p>{user.info}</p>
+        <div className="div">
+            <div className="users">
+                <div className="users-container"> 
+                    <ul>
+                        { dummyUsers.map(user => 
+                            <li key={user.id} className="user">
+                                <picture className="user-picture">
+                                    <img src={user.photoUrl} alt={`${user.name}`} className ="photo" />
+                                </picture>
+                                <div className="user-info-container">
+                                    <div className="user-info">
+                                        <h4>{user.name}</h4>
+                                        <p>{user.info}</p>
+                                    </div>
+                                    <div className="user-action">
+                                        <button className="messageButton" onClick={goToMessage}>Message</button>
+                                    </div>
                                 </div>
-                                <div className="user-action">
-                                    <button onClick={goToMessage}>Message</button>
-                                </div>
-                            </div>
-                        </li>
-                    )}
-                </ul>
-                <div className="chatbox-container">
-                   <div id="talkjs-container" style={{height: "300px"}}></div>
-                 </div>
+                            </li>
+                        )}
+                    </ul>
+                    <div className="chatbox-container">
+                    <div id="talkjs-container" style={{height: "300px"}}></div>
+                    </div>
+                </div>
             </div>
         </div>
     )
