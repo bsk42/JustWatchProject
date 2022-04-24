@@ -25,6 +25,7 @@ function NavBar() {
 
     function GoToFriends() {
         navigator('/friends')
+    }
 
     function GoToAnalytics() {
         navigator('/analytics')
