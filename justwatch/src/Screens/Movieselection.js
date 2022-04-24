@@ -31,19 +31,13 @@ function Movieselection() {
   return (
     <div className="div">
       <div className="div-3">
-        <div className="builder-columns div-4">
+        {/* <div className="builder-columns div-4"> */}
           <div className="builder-column column">
             <div className="title">{currentMovie.title}</div>
-            <div className="borat-2006-adventure-1-h-24">
+            <p className="borat-2006-adventure-1-h-24">
             {currentMovie.description}
-            </div>
-          </div>
-        </div>
-        <div className="div-5">Available on: </div>
-        <div className="div-7">
-          <div className="div-7-text">
-          {currentMovie.streaming}
-          </div>
+            </p>
+          {/* </div> */}
         </div>
         <div className="div-9">Reviews</div>
         <div className="div-10">
@@ -54,14 +48,14 @@ function Movieselection() {
           </div>
         </div>
         <div className="div-11">Trailer</div>
-        <div className="div-12">
-          <div className="trailer">
-          <iframe src={currentMovie.trailer}  title="Trailer" allowFullScreen="true" mozallowfullscreen="true" webkitallowfullscreen="true" frameBorder="no" scrolling="no">
+        {/* <div className="div-12"> */}
 
-          </iframe>
+          <iframe className="trailer" src={currentMovie.trailer}  title="Trailer" allowFullScreen="true" mozallowfullscreen="true" webkitallowfullscreen="true" frameBorder="no" scrolling="no">
             <div className="builder-image-sizer image-sizer-2" />
-          </div>
-        </div>
+          </iframe>
+            
+
+        {/* </div> */}
       </div>
       <div className="div-movie-pic">
         <img src={currentMovie.image} alt="hi" />
