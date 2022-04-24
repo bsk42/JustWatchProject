@@ -1,17 +1,26 @@
 import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./DataPanel.css";
 
 function DataPanel(props) {
 
-  const { usageData } = props;
+  const { usageData, name } = props;
   
   return (
     <div className="data-panel">
-      {`Weekly App Usage: ${usageData.weeklyAppUsage}\n
-        Movies Liked: ${usageData.moviesLiked}\n
-        Movies Disliked: ${usageData.moviesDisliked}\n
-        Movies Superliked: ${usageData.moviesSuperliked}\n
-        Number of Groups: ${usageData.numGroups}`} 
+      <div className="name">
+        { name }
+      </div>
+      <div className="icon">
+        <FontAwesomeIcon icon="fa-solid fa-user" />
+      </div>
+      <div className="data"> 
+        <p className="data-text">{`Weekly App Usage: ${usageData.weeklyAppUsage}`}</p>
+        <p className="data-text">{`Movies Liked: ${usageData.moviesLiked}`}</p>
+        <p className="data-text">{`Movies Disliked: ${usageData.moviesDisliked}`}</p>
+        <p className="data-text">{`Movies Superliked: ${usageData.moviesSuperliked}`}</p>
+        <p className="data-text">{`Number of Groups: ${usageData.numGroups}`}</p>
+      </div>
     </div>
   );
 }

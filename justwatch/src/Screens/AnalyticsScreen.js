@@ -26,16 +26,16 @@ function AnalyticsScreen(props) {
       {/* <NavBar /> */}
       <div className="panel-container">
         <div className="average-stats">
-          Average User Watch Stats
           {/* ICON HERE */}
           <DataPanel 
+            name="Average User Watch Stats"
             usageData={sampleAvgData}
           />
         </div>
         <div className="user-stats">
-          My Watch Stats
           {/* ICON HERE */}
           <DataPanel
+            name="My Watch Stats"
             usageData={sampleUserData} 
           />
         </div>
