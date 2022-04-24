@@ -39,13 +39,25 @@
   }
   .movieSelectionButton{
     position: absolute;
-    left: 25%;
+    left: 15%;
     top: 4.5%;
     padding: 7px;
   }
   .groupsButton{
     position: absolute;
-    right: 25%;
+    left: 30%;
+    top: 4.5%;
+    padding: 7px;
+  }
+  .friendsButton{
+    position: absolute;
+    right: 20%;
+    top: 4.5%;
+    padding: 7px;
+  }
+  .analyticsButton{
+    position: absolute;
+    right: 30%;
     top: 4.5%;
     padding: 7px;
   }
