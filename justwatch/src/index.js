@@ -16,7 +16,9 @@ import NavBar from './Components/NavBarComponent';
 import InitialScreen from './Screens/InitialScreen';
 import Groups from './Screens/Groups';
 import Messaging from './Screens/Messaging';
+import Friends from './Screens/Friends';
 import AnalyticsScreen from './Screens/AnalyticsScreen';
+
 
 
 ReactDOM.render(
@@ -31,6 +33,7 @@ ReactDOM.render(
         <Route path="/profile" element={<Profile />} />
         <Route path="/groups" element={<Groups />} />
         <Route path="/messaging" element={<Messaging />} />
+        <Route path="/friends" element={<Friends />} />
         <Route path="/analytics" element={<AnalyticsScreen />} />
       </Routes>
     </Router>

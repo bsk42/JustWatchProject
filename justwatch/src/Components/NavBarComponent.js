@@ -22,8 +22,13 @@ function NavBar() {
         navigator('/groups')
     }
 
+
+    function GoToFriends() {
+        navigator('/friends')
+
     function GoToAnalytics() {
         navigator('/analytics')
+
     }
 
     return (
@@ -35,7 +40,9 @@ function NavBar() {
         <button className="profileButton" type="submit" onClick={GoToProfile}>Profile</button>
         <button className="movieSelectionButton" type="submit" onClick={GoToMovieSelection}>Movie Selection</button>
         <button className="groupsButton" type="submit" onClick={GoToGroups}>Groups</button>
+        <button className="friendsButton" type="submit" onClick={GoToFriends}>Friends</button>
         <button className="analyticsButton" type="submit" onClick={GoToAnalytics}>Analytics</button>
+
 </div>
 
 
