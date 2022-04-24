@@ -16,6 +16,7 @@ import NavBar from './Components/NavBarComponent';
 import InitialScreen from './Screens/InitialScreen';
 import Groups from './Screens/Groups';
 import Messaging from './Screens/Messaging';
+import AnalyticsScreen from './Screens/AnalyticsScreen';
 
 
 ReactDOM.render(
@@ -30,6 +31,7 @@ ReactDOM.render(
         <Route path="/profile" element={<Profile />} />
         <Route path="/groups" element={<Groups />} />
         <Route path="/messaging" element={<Messaging />} />
+        <Route path="/analytics" element={<AnalyticsScreen />} />
       </Routes>
     </Router>
   </React.StrictMode>,
