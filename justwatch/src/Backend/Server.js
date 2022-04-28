@@ -28,7 +28,7 @@ webapp.get('/', (req, res) => {
 webapp.post('/register', async (req, resp) => {
   // check the name was provided
   try {
-    const result = await lib.addPlayer(db, { username: req.body.username, name: req.body.name, email: req.body.email, password: req.body.password });
+    const result = await lib.register(db, { username: req.body.username, name: req.body.name, email: req.body.email, password: req.body.password });
     // send the response
     resp.status(201).json({ message: `Player with id ${JSON.stringify(result.insertedId)} added` });
     console.log('player inserted');

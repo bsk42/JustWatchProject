@@ -51,6 +51,23 @@ async function deletePlayer(db, name) {
   }
 }
 
+async function insertMovie(db, movie) {
+    try {
+        const {insertedId} = db.collection('Movies').insertMany(movie);
+        return insertedId
+    } catch (err) {
+
+    }
+}
+
+async function getMovies(db) {
+    try {
+        return await db.collection('Movies').find({}).toArray();
+    } catch (err) {
+
+    }
+}
+
 module.exports = {
   connect, register, login
 };
