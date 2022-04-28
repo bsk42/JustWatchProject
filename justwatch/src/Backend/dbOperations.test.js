@@ -1,3 +1,4 @@
+/* eslint-disable jest/no-conditional-expect */
 /* eslint-disable no-undef */
 /**
 * @jest-environment jsdom
@@ -29,4 +30,20 @@ test('addPlayer inserts a new player', async () =>{
     const newPlayer = await db.collection('Users').findOne({username: 'testuser'});
 
     expect(newPlayer.username).toEqual('testuser');
+});
+
+test('login returns user', async () =>{
+    //call addPlayer
+    const result = await dbModule.login(db, 'testuser', 'password');
+    expect(result.username).toEqual('testuser');
+});
+
+test('login does returns user wrong password', async () =>{
+    //call addPlayer
+    try{
+        const result = await dbModule.login(db, 'testuser', 'password');
+     
+    } catch(err){    
+        expect(err.message).toBe('could not login');
+    }  
 });

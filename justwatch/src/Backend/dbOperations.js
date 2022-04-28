@@ -18,13 +18,13 @@ const connect = async (url) => {
   }
 }
 
-async function getUser(db, username) {
+async function login(db, username, password) {
   try {
-    const result = await db.collection('Users').findOne({ username: username });
+    const result = await db.collection('Users').findOne({ username: username, password: password });
     return result;
   } catch (err) {
     console.error(err);
-    throw new Error('could not find player');
+    throw new Error('could not login');
   }
 }
 
@@ -52,7 +52,7 @@ async function deletePlayer(db, name) {
 }
 
 module.exports = {
-  connect, register
+  connect, register, login
 };
 
 connect('mongodb+srv://cis350Final:cis350Final@cluster0.gq1yt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority');

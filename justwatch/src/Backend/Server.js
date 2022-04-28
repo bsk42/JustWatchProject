@@ -25,14 +25,10 @@ webapp.get('/', (req, res) => {
 
 // TODO: define all endpoints as specified in REST API
 
-webapp.post('/login', async (req, resp) => {
+webapp.post('/register', async (req, resp) => {
   // check the name was provided
-  if (!req.body.player || req.body.player.length === 0) {
-    resp.status(404).json({ error: 'username not provided' });
-    return;
-  }
   try {
-    const result = await lib.addPlayer(db, { player: req.body.player, points: req.body.points });
+    const result = await lib.addPlayer(db, { username: req.body.username, name: req.body.name, email: req.body.email, password: req.body.password });
     // send the response
     resp.status(201).json({ message: `Player with id ${JSON.stringify(result.insertedId)} added` });
     console.log('player inserted');
