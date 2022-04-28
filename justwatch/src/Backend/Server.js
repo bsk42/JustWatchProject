@@ -7,7 +7,7 @@ const webapp = express();
 // import database functions
 const lib = require('./dbOperations');
 
-const url = 'mongodb+srv://cis350Final:cis350final@cluster0.gq1yt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+const url = 'mongodb+srv://cis350Final:cis350Final@cluster0.gq1yt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 
 let db;
 

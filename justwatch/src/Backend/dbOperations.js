@@ -28,25 +28,15 @@ async function getUser(db, username) {
   }
 }
 
-async function addPlayer(db, newPlayer){
-  try {
-    let result;
-    const existingPlayer = await getPlayer(db, newPlayer.player);
-    console.log(existingPlayer);
-    if (existingPlayer === null) {
-      console.log('creating new player');
-      try {
-        result = await db.collection('Users').insertOne(newPlayer);
+async function register(db, newUser){
+    try {
+        const result = await db.collection('Users').insertOne(newUser);
         console.log(`Created player with id: ${result.insertedId}`);
         return result;
-      } catch (err) {
+    } catch (err) {
         throw new Error('could not add a player');
-      }
     }
-    return existingPlayer;
-  } catch (e) {
-    throw new Error('could not add a player');
-  }
+        
 };
 
 // delete player
@@ -62,10 +52,10 @@ async function deletePlayer(db, name) {
 }
 
 module.exports = {
-  connect, addPlayer, 
+  connect, register
 };
 
-connect('mongodb+srv://cis350Final:cis350final@cluster0.gq1yt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority');
+connect('mongodb+srv://cis350Final:cis350Final@cluster0.gq1yt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority');
 // this is the URL from the database
 // cis350HW5 = password
 // Test_Data is database name
