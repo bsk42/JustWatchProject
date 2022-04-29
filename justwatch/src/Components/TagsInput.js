@@ -1,7 +1,21 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 
-function TagsInput(){
-    const [tags, setTags] = useState([])
+function TagsInput( {existingTags} ){
+
+    let [tags, setTags] = useState([])
+    let updateTags = useRef(true)
+    
+    if (updateTags.current) {
+        printExistingTags()
+        updateTags.current = false
+    }
+    
+    function printExistingTags() {
+        for (let i = 0; i < existingTags.length; i++) {
+            setTags([...tags, existingTags[i]])
+        }
+    }
+    
 
     function handleKeyDown(e){
         if(e.key !== 'Enter') return
