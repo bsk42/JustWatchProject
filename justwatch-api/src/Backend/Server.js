@@ -1,6 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 // Create express app
 const express = require('express');
+const cors = require('cors');
 
 const webapp = express();
 
@@ -17,6 +18,7 @@ webapp.use(
     extended: true,
   }),
 );
+webapp.use(cors({ credentials: true, origin: ['http://localhost:3000'] }));
 
 // Root endpoint
 webapp.get('/', (req, res) => {
@@ -27,7 +29,9 @@ webapp.get('/', (req, res) => {
 
 webapp.post('/register', async (req, resp) => {
   // check the name was provided
+  console.log(req.body)
   try {
+    // console.log(req.body);
     const result = await lib.register(db, { username: req.body.username, name: req.body.name, email: req.body.email, password: req.body.password });
     // send the response
     resp.status(201).json({ message: `Player with username ${JSON.stringify(result.username)} added` });

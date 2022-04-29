@@ -1,4 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
+import { register } from '../../src/fetcher';
 import React, { useState } from 'react';
 
 import './Register.css';
@@ -56,7 +57,13 @@ function Register() {
           />
         </label>
       </form>
-      <button className="button" type="submit">Register</button>
+      <button 
+        className="button" 
+        type="submit"
+        onClick={() => register(username, name, email, password)}
+      >
+        Register
+      </button>
     </div>
 
   );

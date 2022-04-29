@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
+import { login } from '../../src/fetcher';
 import './Login.css';
 
 function Login() {
@@ -35,7 +36,13 @@ function Login() {
           />
         </label>
       </form>
-      <button className="button" type="submit">Login</button>
+      <button 
+        className="button" 
+        type="submit"
+        onClick={(username, password) => login(username, password)}
+      >
+        Login
+      </button>
     </div>
 
   );
