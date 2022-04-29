@@ -13,7 +13,6 @@ const connect = async (url) => {
     console.log(`Connected to the database: ${conn.databaseName}`);
     return conn;
   } catch (err) {
-    console.error(err);
     throw new Error('could not connect to db');
   }
 }
@@ -23,7 +22,6 @@ async function login(db, username, password) {
     const result = await db.collection('Users').findOne({ username: username, password: password });
     return result;
   } catch (err) {
-    console.error(err);
     throw new Error('could not login');
   }
 }
@@ -46,20 +44,9 @@ async function deleteUser(db, username) {
     // to an array
     await db.collection('Users').deleteMany({ username: username });
   } catch (err) {
-    console.error(err);
     throw new Error('could not delete player');
   }
 }
-/*
-async function insertMovie(db, movie) {
-    try {
-        const {insertedId} = db.collection('Movies').insertMany(movie);
-        return insertedId
-    } catch (err) {
-      throw new Error('could not add new movie');
-    }
-}
-*/
 
 async function getMovies(db) {
     try {
@@ -81,7 +68,6 @@ async function getUser(db, username) {
     try {
         return await db.collection('Users').findOne({username: username});
     } catch (err) {
-        console.error(err);
         throw new Error('could not find user');
     }
 }

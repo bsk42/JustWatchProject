@@ -88,11 +88,11 @@ test('friends', async () =>{
     await dbModule.register(db, user1);
     await dbModule.register(db, user2);
 
-    const user1_result = dbModule.getUser(db, 'user1');
-    const user2_result = dbModule.getUser(db, 'user2');
+    const user1_result = await dbModule.getUser(db, 'user1');
+    const user2_result = await dbModule.getUser(db, 'user2');
 
     try{
-        await dbModule.addFriend(db, user1_result, user2_result);
+        await dbModule.addFriend(db, user1_result.username, user2_result.username);
         const friend1 = await db.collection('Friends').findOne({from: 'user1'});
         const friend2 = await db.collection('Friends').findOne({from: 'user2'});
         expect(friend1.to).toEqual('user2');
@@ -104,15 +104,51 @@ test('friends', async () =>{
     }  
 });
 
+
+
 test('getMovie1', async () =>{
     //call addPlayer
     const result = await dbModule.getMovieByID(db, movie1._id);
     expect(result._id).toEqual(movie1._id);
 });
 
-test('getMovieAll', async () =>{
-    //call addPlayer
-    const result = await dbModule.getUser(db, 'testuser');
-    expect(result.username).toEqual('testuser');
-    await dbModule.deleteUser(db, 'testuser');
+test('movie doesnt exist', async () =>{
+    try{
+        const result = await dbModule.getMovieByID(db, '111111111111');
+    } catch(err){    
+        expect(err.message).toBe('could not find movie');
+    }  
 });
+
+test('user doesnt exist', async () =>{
+    try{
+        const result = await dbModule.deleteUser(db, '111111111111');
+    } catch(err){    
+        expect(err.message).toBe('could not delete player');
+    }  
+});
+
+test('cannot login', async () =>{
+    try{
+        const result = await dbModule.login(db, '111111111111', 'aaaa');
+    } catch(err){    
+        expect(err.message).toBe('could not login');
+    }  
+});
+
+test('getMoviesAll', async () =>{
+    //call addPlayer
+    const result = await dbModule.getMovies(db);
+    expect(result[0]._id).toEqual(movie1._id);
+});
+
+test('cannot get all movies', async () =>{
+    try{
+        da = 1
+        const result = await dbModule.getMovies(da);
+    } catch(err){    
+        expect(err.message).toBe('could not find all movies');
+    }  
+});
+
+
