@@ -40,31 +40,32 @@ async function register(db, newUser){
 };
 
 // delete player
-async function deletePlayer(db, name) {
+async function deleteUser(db, username) {
   try {
     // retrieve all the players in the collection and convert the cursor
     // to an array
-    await db.collection('Players').deleteMany({ player: name });
+    await db.collection('Users').deleteMany({ username: username });
   } catch (err) {
     console.error(err);
     throw new Error('could not delete player');
   }
 }
-
+/*
 async function insertMovie(db, movie) {
     try {
         const {insertedId} = db.collection('Movies').insertMany(movie);
         return insertedId
     } catch (err) {
-
+      throw new Error('could not add new movie');
     }
 }
+*/
 
 async function getMovies(db) {
     try {
         return await db.collection('Movies').find({}).toArray();
     } catch (err) {
-
+      throw new Error('could not find all movies');
     }
 }
 
@@ -73,22 +74,22 @@ async function getMovieByID(db, id) {
     var query = { _id: id };
     return await db.collection('Movies').find(query).toArray();
     } catch (err) {
-
+      throw new Error('could not find movie');
     }
   }
 
 async function getUser(db, username) {
     try {
-        return await db.collection('Users').find({username: username});
+        return await db.collection('Users').findOne({username: username});
     } catch (err) {
-
+        console.error(err);
+        throw new Error('could not find user');
     }
 }
 
 async function getFriends(db, username) {
     try {
-
-    return await db.collection('Friends').find({from: username}).toArray();
+      return await db.collection('Friends').find({from: username}).toArray();
     } catch (err) {
 
     }
@@ -96,15 +97,27 @@ async function getFriends(db, username) {
 
 async function addFriend(db, user1, user2) {
     try {
-        const {insertedId} =  await db.collection('Friends').insertOne({from: user1._id, to: user2._id});
-        await db.collection('Friends').insertOne({from: user2._id, to: user1._id});
+        const {insertedId} =  await db.collection('Friends').insertOne({from: user1.username, to: user2.username});
+        await db.collection('Friends').insertOne({from: user2.username, to: user1.username});
     } catch (err) {
 
     }
 }
 
+//Movie interactions:
+//like, dislike, superlike
+async function movieInteract(db, username, movie, interaction) {
+  try {
+      const {insertedId} =  await db.collection('Interactions').insertOne({username: username, movie: movie._id, interaction: interaction});
+      return insertedId;
+  } catch (err) {
+
+  }
+}
+
+
 module.exports = {
-  connect, register, login, insertMovie, getMovies, getMovieByID, getUser, getFriends
+  connect, register, login, getMovies, getMovieByID, getUser, getFriends, addFriend, movieInteract, deleteUser
 };
 
 connect('mongodb+srv://cis350Final:cis350Final@cluster0.gq1yt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority');
