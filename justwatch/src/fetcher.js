@@ -1,6 +1,7 @@
-const hostUrl = 'http://localhost:5005'
+const hostUrl = 'http://127.0.0.1:5005'
 
 const register = async (username, name, email, password) => {
+  console.log(`${hostUrl}/register`);
   const res = await fetch(`${hostUrl}/register`, {
     method: 'POST',
     body: JSON.stringify({
@@ -9,6 +10,10 @@ const register = async (username, name, email, password) => {
       email,
       password,
     }),
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json'
+    },
   });
   return res.json();
 }
@@ -26,6 +31,10 @@ const getMovies = async () => {
   });
   return res.json();
 }
+
+// const getMovieById = async (id) => {
+//   const res = await fetch(`${hostUrl}/`)
+// }
 
 const deleteUser = async (player) => {
   const res = await fetch(`${hostUrl}/delete?player=${player}`, {
