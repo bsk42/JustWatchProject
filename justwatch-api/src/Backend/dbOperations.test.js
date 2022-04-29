@@ -84,6 +84,8 @@ test('friends', async () =>{
         expect(friend2.to).toEqual('user1');
         await db.collection('Friend').deleteMany({ from: 'user1'});
         await db.collection('Friend').deleteMany({ from: 'user2'});
+        await dbModule.deleteUser(db, 'user1');
+        await dbModule.deleteUser(db, 'user2');
     } catch(err){    
         
     }  

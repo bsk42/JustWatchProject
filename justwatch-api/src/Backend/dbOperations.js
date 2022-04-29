@@ -50,7 +50,7 @@ async function deleteUser(db, username) {
     throw new Error('could not delete player');
   }
 }
-
+/*
 async function insertMovie(db, movie) {
     try {
         const {insertedId} = db.collection('Movies').insertMany(movie);
@@ -59,6 +59,7 @@ async function insertMovie(db, movie) {
 
     }
 }
+*/
 
 async function getMovies(db) {
     try {
@@ -82,14 +83,13 @@ async function getUser(db, username) {
         return await db.collection('Users').findOne({username: username});
     } catch (err) {
         console.error(err);
-         throw new Error('could not find user');
+        throw new Error('could not find user');
     }
 }
 
 async function getFriends(db, username) {
     try {
-
-    return await db.collection('Friends').find({from: username}).toArray();
+      return await db.collection('Friends').find({from: username}).toArray();
     } catch (err) {
 
     }
@@ -117,7 +117,7 @@ async function movieInteract(db, username, movie, interaction) {
 
 
 module.exports = {
-  connect, register, login, insertMovie, getMovies, getMovieByID, getUser, getFriends, addFriend, movieInteract, deleteUser
+  connect, register, login, getMovies, getMovieByID, getUser, getFriends, addFriend, movieInteract, deleteUser
 };
 
 connect('mongodb+srv://cis350Final:cis350Final@cluster0.gq1yt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority');
