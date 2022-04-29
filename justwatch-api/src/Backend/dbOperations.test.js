@@ -91,3 +91,16 @@ test('friends', async () =>{
     }  
 });
 
+test('getMovie1', async () =>{
+    //call addPlayer
+    const result = await dbModule.getUser(db, 'testuser');
+    expect(result.username).toEqual('testuser');
+    await dbModule.deleteUser(db, 'testuser');
+});
+
+test('getMovieAll', async () =>{
+    //call addPlayer
+    const result = await dbModule.getUser(db, 'testuser');
+    expect(result.username).toEqual('testuser');
+    await dbModule.deleteUser(db, 'testuser');
+});
