@@ -8,7 +8,7 @@
 }
 
 .Profile-header {
-  background-color: #282c34;
+  background-color: rgba(1, 1, 42, 1);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -22,9 +22,21 @@
   color: #61dafb;
 }
 
-p { margin:0 }
+p { 
+  margin:0;
+  font-family: 'Lato';
+    font-style: bold;
+ }
 
-h4 { margin:0 }
+
+h4 { margin:0;
+  font-family: 'Lato';
+}
+
+.TagsInput {
+  font-family: 'Lato';
+  font-color: 'white';
+}
 
 button {
   background:    #c00;
@@ -38,4 +50,3 @@ button {
   text-shadow:   1px 1px 0 #000;
   margin-top:10px;
 }
-
