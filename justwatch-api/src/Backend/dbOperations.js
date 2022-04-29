@@ -56,7 +56,7 @@ async function insertMovie(db, movie) {
         const {insertedId} = db.collection('Movies').insertMany(movie);
         return insertedId
     } catch (err) {
-
+      throw new Error('could not add new movie');
     }
 }
 */
@@ -65,7 +65,7 @@ async function getMovies(db) {
     try {
         return await db.collection('Movies').find({}).toArray();
     } catch (err) {
-
+      throw new Error('could not find all movies');
     }
 }
 
@@ -74,7 +74,7 @@ async function getMovieByID(db, id) {
     var query = { _id: id };
     return await db.collection('Movies').find(query).toArray();
     } catch (err) {
-
+      throw new Error('could not find movie');
     }
   }
 
