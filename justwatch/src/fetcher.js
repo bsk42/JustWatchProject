@@ -1,4 +1,4 @@
-const hostUrl = 'http://localhost:5005/'
+const hostUrl = 'http://localhost:5005'
 
 const register = async (username, name, email, password) => {
   const res = await fetch(`${hostUrl}/register`, {
