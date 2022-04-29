@@ -30,28 +30,28 @@ webapp.post('/register', async (req, resp) => {
   try {
     const result = await lib.register(db, { username: req.body.username, name: req.body.name, email: req.body.email, password: req.body.password });
     // send the response
-    resp.status(201).json({ message: `Player with id ${JSON.stringify(result.insertedId)} added` });
+    resp.status(201).json({ message: `Player with username ${JSON.stringify(result.username)} added` });
     console.log('player inserted');
   } catch (err) {
     resp.status(500).json({ error: 'try again later' });
   }
 });
 
-webapp.get('/quiz', async (req, resp) => {
+webapp.get('/login/:username/:password', async (req, resp) => {
   // check the name was provided
   try {
-    const result = await lib.getQuestions(db);
+    const result = await lib.login(db, req.params.username, req.params.password)
     // send the response
     resp.status(200).json({ message: JSON.stringify(result) });
     console.log('questions fetched');
   } catch (err) {
-    resp.status(500).json({ error: 'try again later' });
+    resp.status(500).json({ error: 'error logging in' });
   }
 });
 
-webapp.get('/leaders/:n', async (req, resp) => {
+webapp.get('/movies', async (req, resp) => {
   try {
-    const result = await lib.getLeaders(db, req.params.n);
+    const result = await lib.getMovies();
     resp.status(200).json({ message: JSON.stringify(result) });
     console.log('leaders fetched');
   } catch (err) {

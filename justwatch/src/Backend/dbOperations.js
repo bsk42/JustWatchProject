@@ -68,8 +68,43 @@ async function getMovies(db) {
     }
 }
 
+async function getMovieByID(db, id) {
+    try {
+    var query = { _id: id };
+    return await db.collection('Movies').find(query).toArray();
+    } catch (err) {
+
+    }
+  }
+
+async function getUser(db, username) {
+    try {
+        return await db.collection('Users').find({username: username});
+    } catch (err) {
+
+    }
+}
+
+async function getFriends(db, username) {
+    try {
+
+    return await db.collection('Friends').find({from: username}).toArray();
+    } catch (err) {
+
+    }
+}
+
+async function addFriend(db, user1, user2) {
+    try {
+        const {insertedId} =  await db.collection('Friends').insertOne({from: user1._id, to: user2._id});
+        await db.collection('Friends').insertOne({from: user2._id, to: user1._id});
+    } catch (err) {
+
+    }
+}
+
 module.exports = {
-  connect, register, login
+  connect, register, login, insertMovie, getMovies, getMovieByID, getUser, getFriends
 };
 
 connect('mongodb+srv://cis350Final:cis350Final@cluster0.gq1yt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority');
