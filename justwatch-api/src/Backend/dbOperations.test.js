@@ -33,6 +33,21 @@ const user2 = {
     name: 'user2'
    };
 
+const movie1 = {
+    _id: 'tt1877830',
+    rank: "1",
+    plot: "When the Riddler, a sadistic serial killer, begins murdering key polit...",
+    rankUpDown: "0",
+    title: "The Batman",
+    fullTitle: "The Batman (2022)",
+    year: "2022",
+    image: "https://m.media-amazon.com/images/M/MV5BMDdmMTBiNTYtMDIzNi00NGVlLWIzMD...",
+    crew: "Matt Reeves (dir.), Robert Pattinson, Zoë Kravitz",
+    imDbRating: "8.4",
+    imDbRatingCount: "247929",
+    trailer: "https://www.imdb.com/video/imdb/vi3215114777/imdb/embed"
+}
+
 beforeAll(async () => {
     db = await dbModule.connect(url);
 });
@@ -84,8 +99,6 @@ test('friends', async () =>{
         expect(friend2.to).toEqual('user1');
         await db.collection('Friend').deleteMany({ from: 'user1'});
         await db.collection('Friend').deleteMany({ from: 'user2'});
-        await dbModule.deleteUser(db, 'user1');
-        await dbModule.deleteUser(db, 'user2');
     } catch(err){    
         
     }  
@@ -93,9 +106,8 @@ test('friends', async () =>{
 
 test('getMovie1', async () =>{
     //call addPlayer
-    const result = await dbModule.getUser(db, 'testuser');
-    expect(result.username).toEqual('testuser');
-    await dbModule.deleteUser(db, 'testuser');
+    const result = await dbModule.getMovieByID(db, movie1._id);
+    expect(result._id).toEqual(movie1._id);
 });
 
 test('getMovieAll', async () =>{

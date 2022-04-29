@@ -71,8 +71,7 @@ async function getMovies(db) {
 
 async function getMovieByID(db, id) {
     try {
-    var query = { _id: id };
-    return await db.collection('Movies').find(query).toArray();
+    return await db.collection('Movies').findOne({_id: id});
     } catch (err) {
       throw new Error('could not find movie');
     }
