@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom';
+
 const hostUrl = 'http://127.0.0.1:5005'
 
 const register = async (username, name, email, password) => {
@@ -18,11 +20,25 @@ const register = async (username, name, email, password) => {
   return res.json();
 }
 
+// FIX THIS
 const login = async (username, password) => {
-  const res = await fetch(`${hostUrl}/login?username=${username}&password=${password}`, {
-    method: 'GET',
-  });
-  return res.json();
+  console.log('in login fetcher');
+  fetch(`${hostUrl}/login`, {
+    method: 'POST',
+    body: JSON.stringify({
+      username,
+      password
+    }),
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+  }).then((res) => {
+    res.json();
+  }).then((data) => {
+    console.log(data);
+  })
+  
 }
 
 const getMovies = async () => {

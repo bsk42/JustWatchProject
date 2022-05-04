@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { login } from '../../src/fetcher';
 import './Login.css';
 
@@ -39,7 +40,7 @@ function Login() {
       <button 
         className="button" 
         type="submit"
-        onClick={(username, password) => login(username, password)}
+        onClick={() => login(username, password)}
       >
         Login
       </button>

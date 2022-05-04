@@ -40,13 +40,14 @@ webapp.post('/register', async (req, resp) => {
   }
 });
 
-webapp.get('/login/:username/:password', async (req, resp) => {
+webapp.post('/login', async (req, resp) => {
   // check the name was provided
+  console.log('in server for login');
   try {
-    const result = await lib.login(db, req.params.username, req.params.password);
+    const result = await lib.login(db, req.body.username, req.body.password);
     // send the response
-    resp.status(200).json({ message: JSON.stringify(result) });
-    console.log('questions fetched');
+    resp.status(201).json({ message: JSON.stringify(result) });
+    console.log('user logged in');
   } catch (err) {
     resp.status(500).json({ error: 'error logging in' });
   }

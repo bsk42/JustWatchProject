@@ -18,6 +18,10 @@ const connect = async (url) => {
 }
 
 async function login(db, username, password) {
+  console.log(db);
+  console.log(username);
+  console.log(password);
+  crossOriginResourcePolicy.log
   try {
     const result = await db.collection('Users').findOne({ username: username, password: password });
     return result;
