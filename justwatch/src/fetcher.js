@@ -44,6 +44,9 @@ const login = async (username, password) => {
 const getMovies = async () => {
   const res = await fetch(`${hostUrl}/movies`, {
     method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    },
   });
   return res.json();
 }

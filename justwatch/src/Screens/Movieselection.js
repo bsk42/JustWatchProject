@@ -1,9 +1,23 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Movieselection.css';
-import {GetMovieInfoById} from '../Services/MovieService.js';
+import { GetMovieInfoById } from '../Services/MovieService.js';
+import { getMovies } from '../fetcher.js';
 
 function Movieselection() {
+
+  const [allMovies, setAllMovies] = useState([]);
+  const [currMovie, setCurrMovie] = useState({});
+
+  useEffect(() => {
+    getMovies().then((data) => {
+      setAllMovies(data.message);
+    })
+  });
+
+  useEffect(() => {
+
+  }, []);
 
   const dislikeMovie = null;
   const superlikeMovie = null;

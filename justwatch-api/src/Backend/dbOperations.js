@@ -54,7 +54,7 @@ async function deleteUser(db, username) {
 
 async function getMovies(db) {
     try {
-        return await db.collection('Movies').find({}).toArray();
+        return await db.collection('Movies').find({}).project({_id: 1}).toArray();
     } catch (err) {
       throw new Error('could not find all movies');
     }

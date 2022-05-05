@@ -55,9 +55,8 @@ webapp.post('/login', async (req, resp) => {
 
 webapp.get('/movies', async (req, resp) => {
   try {
-    const result = await lib.getMovies();
+    const result = await lib.getMovies(db);
     resp.status(200).json({ message: JSON.stringify(result) });
-    console.log('leaders fetched');
   } catch (err) {
     resp.status(500).json({ error: 'try again later' });
   }
