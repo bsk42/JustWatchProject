@@ -52,6 +52,7 @@ beforeAll(async () => {
     db = await dbModule.connect(url);
 });
 
+
 test('addPlayer inserts a new player', async () =>{
     //call addPlayer
     await dbModule.register(db, player)
