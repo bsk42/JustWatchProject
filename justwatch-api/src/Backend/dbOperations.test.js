@@ -144,7 +144,7 @@ test('getMoviesAll', async () =>{
 
 test('cannot get all movies', async () =>{
     try{
-        da = 1
+        const da = 1
         const result = await dbModule.getMovies(da);
     } catch(err){    
         expect(err.message).toBe('could not find all movies');
