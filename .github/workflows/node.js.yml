@@ -23,7 +23,5 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
- 
-    - run: cd justwatch
     - run: npm ci
-    - run: npm test
+    - run: npm test --coverage
