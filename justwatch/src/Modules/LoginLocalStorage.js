@@ -1,5 +1,5 @@
 export function getLoggedInUser() {
-    return localStorage.getItem('currentUser');
+    return JSON.parse(localStorage.getItem('currentUser'));
   }
   
 export function setLoggedInUser(user) {
