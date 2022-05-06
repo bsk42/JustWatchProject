@@ -55,11 +55,11 @@ webapp.post('/register', async (req, resp) => {
 
 webapp.get('/movies', async (req, resp) => {
   try {
-    const result = await lib.getMovies();
+    const result = await lib.getMovies(db);
     resp.status(200).json({ message: JSON.stringify(result) });
-    console.log('leaders fetched');
   } catch (err) {
     resp.status(500).json({ error: 'try again later' });
+    console.log(err);
   }
 });
 
@@ -73,26 +73,47 @@ webapp.get('/movies/:id', async (req, resp) => {
   }
 });
 
-// GET USER - EITHER BY JUST USERNAME OR BY USERNAME & PASSWORD (FOR LOGIN)
 webapp.get('/users/getUser', async (req, resp) => {
-  console.log(req);
+  const { username, password } = req.query;
   try {
-    const result = null;
-    // LOGIN IF PASSWORD PROVIDED
-    if (req.body.password) {
-      result = await lib.login(db, req.body.username, req.body.password);
-    } else {
-      result = await lib.getUser(db, req.body.username);
-    }
-    if (result == null) {
-      resp.status(404).json({ error: 'user not found' });
-    } else {
-      resp.status(200).json({ message: JSON.stringify(result) });
-    }
-  } catch (err) {
-    resp.status(500).json({ error: 'error retrieving user' });
-  }
+        // LOGIN IF PASSWORD PROVIDED
+        if (password) {
+          result = await lib.login(db, username, password);
+        } else {
+          result = await lib.getUser(db, username);
+        }
+        if (result == null) {
+          resp.status(404).json({ error: 'user not found' });
+        } else {
+          resp.status(200).json({ message: JSON.stringify(result) });
+        }
+      } catch (err) {
+        resp.status(500).json({ error: 'error retrieving user' });
+      }
 });
+
+// GET USER - EITHER BY JUST USERNAME OR BY USERNAME & PASSWORD (FOR LOGIN)
+// webapp.get('/users/getUser', async (req, resp) => {
+//   //const { username, password } = req.query;
+//   console.log("ran");
+//   resp.status(200);
+//   // try {
+//   //   const result = null;
+//   //   // LOGIN IF PASSWORD PROVIDED
+//   //   if (password) {
+//   //     result = await lib.login(db, username, password);
+//   //   } else {
+//   //     result = await lib.getUser(db, username);
+//   //   }
+//   //   if (result == null) {
+//   //     resp.status(404).json({ error: 'user not found' });
+//   //   } else {
+//   //     resp.status(200).json({ message: JSON.stringify(result) });
+//   //   }
+//   // } catch (err) {
+//   //   resp.status(500).json({ error: 'error retrieving user' });
+//   // }
+// });
 
 webapp.get('/users/friends/:username', async (req, resp) => {
   try {

@@ -12,15 +12,17 @@ function Login() {
     //check if user exists
     // console.log(usernameInput);
     // console.log(passwordInput);
-    getUser(username, password).then((data) => {
-      // if user exists, set current user in local storage
-      console.log(usernameInput);
-      console.log(passwordInput);
-    }).catch((err) => {
-      // if user does not, show error
-      console.log('user not found');
-    });
-    
+    // getUser(username, password).then((data) => {
+    //   // if user exists, set current user in local storage
+    //   console.log(usernameInput);
+    //   console.log(passwordInput);
+    // }).catch((err) => {
+    //   // if user does not, show error
+    //   console.log(err);
+    // });
+
+    const result = await getUser(usernameInput, passwordInput);
+    console.log("res: " + result);
     
   }
 

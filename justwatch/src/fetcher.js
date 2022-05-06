@@ -42,14 +42,8 @@ const register = async (username, name, email, password) => {
 // }
 
 const getUser = async (username, password) => {
-  console.log(username);
-  console.log(password);
-  const res = await fetch(`${hostUrl}/getUser`, {
+  const res = await fetch(`${hostUrl}/getUser?username=${username}&password=${password}`, {
     method: 'GET',
-    body: JSON.stringify({
-      username, 
-      password,
-    }),
     mode: 'cors',
     headers: {
       'Content-Type': 'application/json'
