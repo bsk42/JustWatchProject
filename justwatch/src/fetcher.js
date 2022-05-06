@@ -42,7 +42,7 @@ const register = async (username, name, email, password) => {
 // }
 
 const getUser = async (username, password) => {
-  const res = await fetch(`${hostUrl}/getUser?username=${username}&password=${password}`, {
+  const res = await fetch(`${hostUrl}/users/getUser?username=${username}&password=${password}`, {
     method: 'GET',
     mode: 'cors',
     headers: {

@@ -2,27 +2,32 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getUser } from '../../src/fetcher';
+import { setLoggedInUser } from '../Modules/LoginLocalStorage';
 import './Login.css';
 
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigator = useNavigate();
 
   async function loginUser(usernameInput, passwordInput) {
     //check if user exists
-    // console.log(usernameInput);
-    // console.log(passwordInput);
-    // getUser(username, password).then((data) => {
-    //   // if user exists, set current user in local storage
-    //   console.log(usernameInput);
-    //   console.log(passwordInput);
-    // }).catch((err) => {
-    //   // if user does not, show error
-    //   console.log(err);
-    // });
+    getUser(username, password).then((data) => {
+      // if user exists, set current user in local storage
+      if (data.message) {
+        setLoggedInUser(data.message); 
+        navigator('/movieselection');
+      } else { //if info incorrect
+        alert("Incorrect Username or Password");
+      }
+    }).catch((err) => {
+      // if user does not, show error
+      console.log(err);
+    });
 
-    const result = await getUser(usernameInput, passwordInput);
-    console.log("res: " + result);
+    // const result = await getUser(usernameInput, passwordInput);
+    // if ()
+    // console.log("res: " + result);
     
   }
 
