@@ -23,6 +23,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-        cache-dependency-path: './justwatch/package-lock.json'
+ 
+    - run: cd justwatch
     - run: npm ci
     - run: npm test
