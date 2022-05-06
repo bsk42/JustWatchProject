@@ -1,12 +1,28 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { login } from '../../src/fetcher';
+import { getUser } from '../../src/fetcher';
 import './Login.css';
 
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  async function loginUser(usernameInput, passwordInput) {
+    //check if user exists
+    // console.log(usernameInput);
+    // console.log(passwordInput);
+    getUser(username, password).then((data) => {
+      // if user exists, set current user in local storage
+      console.log(usernameInput);
+      console.log(passwordInput);
+    }).catch((err) => {
+      // if user does not, show error
+      console.log('user not found');
+    });
+    
+    
+  }
 
   return (
     <div className="div">
@@ -40,7 +56,7 @@ function Login() {
       <button 
         className="button" 
         type="submit"
-        onClick={() => login(username, password)}
+        onClick={() => loginUser(username, password)}
       >
         Login
       </button>

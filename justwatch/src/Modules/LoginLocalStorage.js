@@ -1,8 +1,8 @@
-export function getLoggedInUser() {
+export function GetLoggedInUser() {
     return localStorage.getItem('currentUser');
   }
   
-export function setLoggedInUser(user) {
+export function SetLoggedInUser(user) {
     localStorage.setItem('currentUser', user);
   }
   

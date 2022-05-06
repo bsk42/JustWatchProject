@@ -18,10 +18,6 @@ const connect = async (url) => {
 }
 
 async function login(db, username, password) {
-  console.log(db);
-  console.log(username);
-  console.log(password);
-  crossOriginResourcePolicy.log
   try {
     const result = await db.collection('Users').findOne({ username: username, password: password });
     return result;
@@ -70,7 +66,9 @@ async function getMovieByID(db, id) {
 
 async function getUser(db, username) {
     try {
-        return await db.collection('Users').findOne({username: username});
+        const res = await db.collection('Users').findOne({username: username});
+        // console.log(res);
+        return res;
     } catch (err) {
         throw new Error('could not find user');
     }

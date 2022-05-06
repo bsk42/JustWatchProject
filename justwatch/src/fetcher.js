@@ -21,24 +21,41 @@ const register = async (username, name, email, password) => {
 }
 
 // FIX THIS
-const login = async (username, password) => {
-  console.log('in login fetcher');
-  fetch(`${hostUrl}/login`, {
-    method: 'POST',
+// const login = async (username, password) => {
+//   console.log('in login fetcher');
+//   fetch(`${hostUrl}/login`, {
+//     method: 'POST',
+//     body: JSON.stringify({
+//       username,
+//       password
+//     }),
+//     mode: 'cors',
+//     headers: {
+//       'Content-Type': 'application/json'
+//     },
+//   }).then((res) => {
+//     res.json();
+//   }).then((data) => {
+//     console.log(data);
+//   })
+  
+// }
+
+const getUser = async (username, password) => {
+  console.log(username);
+  console.log(password);
+  const res = await fetch(`${hostUrl}/getUser`, {
+    method: 'GET',
     body: JSON.stringify({
-      username,
-      password
+      username, 
+      password,
     }),
     mode: 'cors',
     headers: {
       'Content-Type': 'application/json'
     },
-  }).then((res) => {
-    res.json();
-  }).then((data) => {
-    console.log(data);
-  })
-  
+  });
+  return res.json();
 }
 
 const getMovies = async () => {
@@ -72,7 +89,8 @@ const updateScore = async (player, points) => {
 
 export {
   register,
-  login,
+  // login,
+  getUser,
   getMovies,
   deleteUser,
   updateScore,

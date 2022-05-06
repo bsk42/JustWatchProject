@@ -40,18 +40,18 @@ webapp.post('/register', async (req, resp) => {
   }
 });
 
-webapp.post('/login', async (req, resp) => {
-  // check the name was provided
-  console.log('in server for login');
-  try {
-    const result = await lib.login(db, req.body.username, req.body.password);
-    // send the response
-    resp.status(201).json({ message: JSON.stringify(result) });
-    console.log('user logged in');
-  } catch (err) {
-    resp.status(500).json({ error: 'error logging in' });
-  }
-});
+// webapp.post('/login', async (req, resp) => {
+//   // check the name was provided
+//   console.log('in server for login');
+//   try {
+//     const result = await lib.login(db, req.body.username, req.body.password);
+//     // send the response
+//     resp.status(201).json({ message: JSON.stringify(result) });
+//     console.log('user logged in');
+//   } catch (err) {
+//     resp.status(500).json({ error: 'error logging in' });
+//   }
+// });
 
 webapp.get('/movies', async (req, resp) => {
   try {
@@ -73,10 +73,22 @@ webapp.get('/movies/:id', async (req, resp) => {
   }
 });
 
-webapp.get('/users/:username', async (req, resp) => {
+// GET USER - EITHER BY JUST USERNAME OR BY USERNAME & PASSWORD (FOR LOGIN)
+webapp.get('/users/getUser', async (req, resp) => {
+  console.log(req);
   try {
-    const result = await lib.getUser(db, req.params.username);
-    resp.status(200).json({ message: JSON.stringify(result) });
+    const result = null;
+    // LOGIN IF PASSWORD PROVIDED
+    if (req.body.password) {
+      result = await lib.login(db, req.body.username, req.body.password);
+    } else {
+      result = await lib.getUser(db, req.body.username);
+    }
+    if (result == null) {
+      resp.status(404).json({ error: 'user not found' });
+    } else {
+      resp.status(200).json({ message: JSON.stringify(result) });
+    }
   } catch (err) {
     resp.status(500).json({ error: 'error retrieving user' });
   }
