@@ -208,6 +208,7 @@ module.exports = {
   getLikesByUser,
   getInteractions,
   startConversation,
+  sendMessage,
   fetchMessages,
   getUsers
 };

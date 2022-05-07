@@ -171,7 +171,7 @@ test('interactions', async () =>{
     }  
 });
 
-test('interactions', async () =>{
+test('interactionsByUser', async () =>{
     await dbModule.register(db, user1);
 
     const user1_result = await dbModule.getUser(db, 'user1');
@@ -185,5 +185,56 @@ test('interactions', async () =>{
         
     }  
 });
+
+test('likesByUser', async () =>{
+    await dbModule.register(db, user1);
+
+    const user1_result = await dbModule.getUser(db, 'user1');
+    await dbModule.newMovieInteract(db, user1_result.username, movie1._id, 'like');
+
+    try{
+        const result = await dbModule.getLikesByUser(db, user1_result.username);
+        expect(result).toEqual('like');
+        await db.collection('Interactions').deleteMany({ from: 'user1'});
+    } catch(err){    
+        
+    }  
+});
+
+test('startConvo', async () =>{
+    await dbModule.register(db, user1);
+
+    const user1_result = await dbModule.getUser(db, 'user1');
+    const user2_result = await dbModule.getUser(db, 'user2');
+
+
+    try{
+        const result = await dbModule.startConversation(db, user1_result.username, user2_result.username, ['hi', 'hello']);
+        expect(result).toBe('hi');
+        await db.collection('Messages').deleteMany({ from: 'user1'});
+        await db.collection('Messages').deleteMany({ from: 'user1'});
+    } catch(err){    
+        
+    }  
+});
+
+test('sendingMessages', async () =>{
+    await dbModule.register(db, user1);
+
+    const user1_result = await dbModule.getUser(db, 'user1');
+    const user2_result = await dbModule.getUser(db, 'user2');
+
+
+    try{
+        const message1 = await dbModule.sendMessage(db, user1_result.username, user2_result.username, 'hi');
+        expect(message1.content).toContain('hi');
+        await db.collection('Messages').deleteMany({ from: 'user1'});
+        await db.collection('Messages').deleteMany({ from: 'user1'});
+    } catch(err){    
+        
+    }   
+});
+
+
 
 
