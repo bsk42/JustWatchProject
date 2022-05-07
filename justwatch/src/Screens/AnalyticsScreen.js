@@ -1,25 +1,33 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import DataPanel from "../Components/DataPanel";
-import NavBar from "../Components/NavBarComponent";
+import { getInteractions, getUsers } from "../Services/fetcher";
+import { getLoggedInUser } from '../Modules/LoginLocalStorage';
+import { getUserStats, getAllUserStats, getAverageStats } from "../Utils/analyticsHelpers";
 import "./AnalyticsScreen.css";
 
 function AnalyticsScreen(props) {
 
-  const sampleAvgData = {
-    weeklyAppUsage: "20 minutes",
-    moviesLiked: 10,
-    moviesDisliked: 20,
-    moviesSuperliked: 2,
-    numGroups: 3,
-  }
+  const [currUser, setCurrUser] = useState(getLoggedInUser().username);
+  const [allInteractions, setAllInteractions] = useState([]);
+  const [allUsers, setAllUsers] = useState([]);
+  const [avgData, setAvgData] = useState({});
+  const [userData, setUserData] = useState({});
+  const [allUserStats, setAllUserStats] = useState([]);
 
-  const sampleUserData = {
-    weeklyAppUsage: "40 minutes",
-    moviesLiked: 15,
-    moviesDisliked: 12,
-    moviesSuperliked: 4,
-    numGroups: 5,
-  }
+  useEffect(() => {
+    async function getData() {
+      await getInteractions().then((data) => {
+        setAllInteractions(JSON.parse(data.message));
+      });
+      await getUsers().then((data) => {
+        setAllUsers(JSON.parse(data.message));
+      });
+      await setUserData(await getUserStats(currUser, allInteractions));
+      await setAllUserStats(await getAllUserStats(allInteractions, allUsers));
+      await setAvgData(await getAverageStats(allUserStats));
+    }
+    getData();
+  });
 
   return (
     <div className="analytics-screen">
@@ -29,14 +37,14 @@ function AnalyticsScreen(props) {
           {/* ICON HERE */}
           <DataPanel 
             name="Average User Watch Stats"
-            usageData={sampleAvgData}
+            usageData={avgData}
           />
         </div>
         <div className="user-stats">
           {/* ICON HERE */}
           <DataPanel
             name="My Watch Stats"
-            usageData={sampleUserData} 
+            usageData={userData} 
           />
         </div>
       </div>

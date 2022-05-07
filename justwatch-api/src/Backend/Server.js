@@ -93,6 +93,15 @@ webapp.get('/users/getUser', async (req, resp) => {
       }
 });
 
+webapp.get('/users', async (req, resp) => {
+  try {
+    const result = await lib.getUsers(db);
+    resp.status(200).json({ message: JSON.stringify(result) });
+  } catch (err) {
+    resp.status(500).json({ error: 'error retrieving users' });
+  }
+});
+
 //get movie that the user has not interacted with yet
 webapp.get('/users/getNewMovie', async (req, resp) => {
   const { username } = req.query;
@@ -156,6 +165,16 @@ webapp.post('/newInteraction', async (req, resp) => {
       } catch (err) {
         resp.status(500).json({ error: 'error creating new interaction' });
       }
+});
+
+webapp.get('/interactions', async (req, resp) => {
+  try {
+    const result = await lib.getInteractions(db);
+    resp.status(200).json({ message: JSON.stringify(result) });
+  } catch (err) {
+    resp.status(500).json({ error: 'try again later' });
+    console.log(err);
+  }
 });
 
 // GET USER - EITHER BY JUST USERNAME OR BY USERNAME & PASSWORD (FOR LOGIN)
