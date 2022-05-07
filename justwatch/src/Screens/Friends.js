@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import { dummyUsers } from "./Users";
 import './Friends.css'
-import Talk from "talkjs";
+
 import { useNavigate } from 'react-router-dom';
 
 function Friends() {
@@ -26,45 +26,7 @@ function Friends() {
         });
       }, []);
 */
-    const handleClick = (userId) => {
-
-        /* Retrieve the two users that will participate in the conversation */
-        const currentUser = 1;
-        const user = dummyUsers.find(user => user.id === userId)
-
-        alert(userId);
-
-        /* Session initialization code */
-        Talk.ready
-        .then(() => {
-            /* Create the two users that will participate in the conversation */
-            const me = new Talk.User(currentUser);
-            const other = new Talk.User(user)
-
-            /* Create a talk session if this does not exist. Remember to replace tthe APP ID with the one on your dashboard */
-            if (!window.talkSession) {
-                window.talkSession = new Talk.Session({
-                    appId: 'tcWjDr0h',
-                    me: me
-                });
-            } 
-            
-            /* Get a conversation ID or create one */
-            const conversationId = Talk.oneOnOneId(me, other);
-            const conversation = window.talkSession.getOrCreateConversation(conversationId);
-            
-            /* Set participants of the conversations */
-            conversation.setParticipant(me);
-            conversation.setParticipant(other);
-
-            /* Create and mount chatbox in container */
-            this.chatbox = window.talkSession.createChatbox(conversation);
-            this.chatbox.mount(this.container);
-        })            
-        .catch(e => console.error(e));
-        
-    };
-
+ 
     return (
         <div className="div">
             <div className="users">

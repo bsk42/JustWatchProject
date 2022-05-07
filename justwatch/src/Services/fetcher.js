@@ -118,14 +118,16 @@ const updateScore = async (player, points) => {
     }),
   });
   return res.json();
+
+  
 }
 
 
 // retrieves all the messages
-export const getMessages = async () =>{
+const getMessages = async () =>{
   try{
       const currentUser = getLoggedInUser();
-      const response = await axios.get(`${domain}/messages?username=${currentUse.username}`);
+      const response = await fetch(`${hostUrl}/messages?username=${currentUser.username}`);
       return response.data.data;
   }
   catch(err){
@@ -135,16 +137,21 @@ export const getMessages = async () =>{
 
 // send a message to the server
 const sendMessage = async (from, to, content) =>{
-  try{
-      if(from.length> 0 && to.length > 0 && content.length > 0){
-          const response = await axios.post(`${hostUrl}/messages`,
-          `from=${from}&to=${to}&content=${content}`);
-          return response.status;
-      }
-  }
-  catch(err){
-      console.error(err);
-  }
+ 
+  const res = await fetch(`${hostUrl}/messages`,
+  `from=${from}&to=${to}&content=${content}`, {
+    method: 'POST',
+    body: JSON.stringify({
+      from, 
+      to,
+      content,
+    }),
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+  });
+  return res.json();
 }
 
 
