@@ -6,6 +6,7 @@ import InitialScreen from './Src/Screens/InitialScreen';
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import LoginScreen from './Src/Screens/Login';
 import RegisterScreen from './Src/Screens/RegisterScreen';
+import MovieSelectionScreen from './Src/Screens/MovieSelectionScreen';
 
 
 const Stack = createNativeStackNavigator();
@@ -17,6 +18,7 @@ export default function App() {
         <Stack.Screen name="InitialScreen" component={InitialScreen} options={{ title: 'Welcome to JustWatch!' }} />
         <Stack.Screen name="LoginScreen" component={LoginScreen} options={{ title: 'JustWatch' }} />
         <Stack.Screen name="RegisterScreen" component={RegisterScreen} options={{ title: 'JustWatch' }} />
+        <Stack.Screen name="MovieSelectionScreen" component={MovieSelectionScreen} options={{ title: 'JustWatch' }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

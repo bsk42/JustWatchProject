@@ -44,7 +44,7 @@ function LoginScreen({ navigation }) {
       // if user exists, set current user in local storage
       if (data.message) {
         setLoggedInUser(data.message); 
-        //navigator('/movieselection');
+        navigation.navigate("MovieSelectionScreen");
       } else { //if info incorrect
         alert("Incorrect Username or Password");
       }
