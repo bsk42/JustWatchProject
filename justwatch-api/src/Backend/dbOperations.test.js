@@ -203,6 +203,7 @@ test('likesByUser', async () =>{
 
 test('startConvo', async () =>{
     await dbModule.register(db, user1);
+    await dbModule.register(db, user2);
 
     const user1_result = await dbModule.getUser(db, 'user1');
     const user2_result = await dbModule.getUser(db, 'user2');
@@ -211,25 +212,16 @@ test('startConvo', async () =>{
     try{
         const result = await dbModule.startConversation(db, user1_result.username, user2_result.username, ['hi', 'hello']);
         expect(result).toBe('hi');
-        await db.collection('Messages').deleteMany({ from: 'user1'});
-        await db.collection('Messages').deleteMany({ from: 'user1'});
     } catch(err){    
         
     }  
 });
 
 test('sendingMessages', async () =>{
-    await dbModule.register(db, user1);
-
-    const user1_result = await dbModule.getUser(db, 'user1');
-    const user2_result = await dbModule.getUser(db, 'user2');
-
-
     try{
-        const message1 = await dbModule.sendMessage(db, user1_result.username, user2_result.username, 'hi');
+        const message1 = await dbModule.sendMessage(db, 'user1', 'user2', 'hi');
         expect(message1.content).toContain('hi');
-        await db.collection('Messages').deleteMany({ from: 'user1'});
-        await db.collection('Messages').deleteMany({ from: 'user1'});
+        //await db.collection('Messages').deleteMany({users: {$all: ['user1', 'user2']}});
     } catch(err){    
         
     }   

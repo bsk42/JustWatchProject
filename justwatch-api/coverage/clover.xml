@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1651953223208" clover="3.2.0">
-  <project timestamp="1651953223209" name="All files">
-    <metrics statements="72" coveredstatements="44" conditionals="2" coveredconditionals="2" methods="20" coveredmethods="13" elements="94" coveredelements="59" complexity="0" loc="72" ncloc="72" packages="1" files="1" classes="1"/>
+<coverage generated="1651956216670" clover="3.2.0">
+  <project timestamp="1651956216670" name="All files">
+    <metrics statements="73" coveredstatements="47" conditionals="2" coveredconditionals="2" methods="20" coveredmethods="13" elements="95" coveredelements="62" complexity="0" loc="73" ncloc="73" packages="1" files="1" classes="1"/>
     <file name="dbOperations.js" path="/Users/aruhl/Documents/GitHub/JustWatchProject/justwatch-api/src/Backend/dbOperations.js">
-      <metrics statements="72" coveredstatements="44" conditionals="2" coveredconditionals="2" methods="20" coveredmethods="13"/>
+      <metrics statements="73" coveredstatements="47" conditionals="2" coveredconditionals="2" methods="20" coveredmethods="13"/>
       <line num="3" count="1" type="stmt"/>
       <line num="6" count="1" type="stmt"/>
       <line num="7" count="2" type="stmt"/>
@@ -15,9 +15,9 @@
       <line num="22" count="3" type="stmt"/>
       <line num="23" count="3" type="stmt"/>
       <line num="25" count="0" type="stmt"/>
-      <line num="30" count="8" type="stmt"/>
-      <line num="31" count="8" type="stmt"/>
-      <line num="33" count="8" type="cond" truecount="2" falsecount="0"/>
+      <line num="30" count="10" type="stmt"/>
+      <line num="31" count="10" type="stmt"/>
+      <line num="33" count="10" type="cond" truecount="2" falsecount="0"/>
       <line num="35" count="3" type="stmt"/>
       <line num="36" count="3" type="stmt"/>
       <line num="37" count="3" type="stmt"/>
@@ -61,21 +61,22 @@
       <line num="140" count="0" type="stmt"/>
       <line num="147" count="1" type="stmt"/>
       <line num="148" count="1" type="stmt"/>
-      <line num="149" count="0" type="stmt"/>
-      <line num="150" count="0" type="stmt"/>
-      <line num="151" count="0" type="stmt"/>
-      <line num="157" count="0" type="stmt"/>
+      <line num="149" count="1" type="stmt"/>
+      <line num="150" count="1" type="stmt"/>
+      <line num="151" count="1" type="stmt"/>
+      <line num="152" count="0" type="stmt"/>
       <line num="158" count="0" type="stmt"/>
-      <line num="160" count="0" type="stmt"/>
-      <line num="167" count="3" type="stmt"/>
+      <line num="159" count="0" type="stmt"/>
+      <line num="161" count="0" type="stmt"/>
       <line num="168" count="3" type="stmt"/>
       <line num="169" count="3" type="stmt"/>
-      <line num="176" count="1" type="stmt"/>
+      <line num="170" count="3" type="stmt"/>
       <line num="177" count="1" type="stmt"/>
-      <line num="185" count="1" type="stmt"/>
+      <line num="178" count="1" type="stmt"/>
       <line num="186" count="1" type="stmt"/>
-      <line num="193" count="1" type="stmt"/>
-      <line num="216" count="1" type="stmt"/>
+      <line num="187" count="1" type="stmt"/>
+      <line num="194" count="1" type="stmt"/>
+      <line num="217" count="1" type="stmt"/>
     </file>
   </project>
 </coverage>
