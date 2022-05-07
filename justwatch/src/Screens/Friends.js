@@ -1,8 +1,10 @@
-import React, {useEffect} from 'react';
-import { dummyUsers } from "./Users";
+import React, {useEffect, useState} from 'react';
 import './Friends.css'
 
 import { useNavigate } from 'react-router-dom';
+import { getFriendsList } from '../Services/fetcher';
+import { dummyUsers } from './Users';
+import "regenerator-runtime/runtime.js";
 
 function Friends() {
 
@@ -12,35 +14,58 @@ function Friends() {
         navigator('/messaging');
     }
 
-    /*
+    const [friendsList, setFriendsList] = useState([{
+        _id: "6275db4460226a7666661363",
+        username: "ben1",
+        name: "ben",
+        email: "email",
+        password: "pass",
+        likes: [
+            "tt0443453",
+            "tt8178634",
+            "tt1160419",
+            "tt1464335",
+            "tt13610562"
+        ],
+        matches: [
+            "tt0443453",
+            "tt8178634",
+            "tt1160419",
+            "tt1464335",
+            "tt13610562"
+        ],
+        numMatches: 5
+    }]);
+
     useEffect(() => {
-        Talk.ready.then(() => {
-          var me = new Talk.User({
-            id: 1,
-            name: 'oliver',
-            email: 'oliver@sample.com',
-            photoUrl: 'https://scontent-iad3-1.xx.fbcdn.net/v/t1.18169-9/970139_1383007531924595_2013075611_n.jpg?_nc_cat=101&ccb=1-5&_nc_sid=de6eea&_nc_ohc=QWSQ8AFnQzAAX-gQ1bK&_nc_ht=scontent-iad3-1.xx&oh=00_AT_f7ri5uKcJi0d4y9J3pZFx8WEA3T_nr2gPq2fzg1goIA&oe=628CC9FA',
-            welcomeMessage: 'Hey there! How are you? :-)',
-            role: 'default',
-          });
-        });
-      }, []);
-*/
- 
+        console.log("hi");
+        getFriendsList().then((data) => setFriendsList(data));
+    }, []);
+
+    // let mounted = true;
+    //     getFriendsList()
+    //     .then((data) => {
+    //         if (mounted) {
+    //           setFriendsList(data);
+    //         }
+    //     })
+    //     .catch((err) => console.log(err));
+    //     return () => mounted = false;
+
+
     return (
         <div className="div">
             <div className="users">
                 <div className="users-container"> 
                     <ul>
-                        { dummyUsers.map(user => 
-                            <li key={user.id} className="user">
-                                <picture className="user-picture">
-                                    <img src={user.photoUrl} alt={`${user.name}`} className ="photo" />
-                                </picture>
+                        { friendsList.map(user => 
+                            <li key={user._id} className="user">
                                 <div className="user-info-container">
                                     <div className="user-info">
                                         <h4>{user.name}</h4>
-                                        <p>{user.info}</p>
+                                        <p>Email: {user.email}</p>
+                                        <p>Number Matches: {user.numMatches}</p>
+                                        <p>Movies you both like: {user.movieMatches}</p>
                                     </div>
                                     <div className="user-action">
                                         <button className="messageButton" onClick={goToMessage}>Message</button>

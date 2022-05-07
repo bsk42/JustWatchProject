@@ -41,6 +41,18 @@ async function interactWithMovie(movie, interaction) {
   }
 }
 
+async function getFriendsList() {
+  try{
+    const user = getLoggedInUser();
+      const response = await fetch(`${hostUrl}/users/friendsList?username=${user.username}`, {method: 'GET'});
+      const data =  await response.json();
+      console.log(data);
+      return data.data;
+  }catch(error) {
+      console.log(error);
+  }
+}
+
 const register = async (username, name, email, password) => {
   console.log(`${hostUrl}/register`);
   const res = await fetch(`${hostUrl}/register`, {
@@ -91,8 +103,22 @@ const getUser = async (username, password) => {
   return res.json();
 }
 
+const getUsers = async (username, password) => {
+  const res = await fetch(`${hostUrl}/users`, {
+    method: 'GET',
+  });
+  return res.json();
+}
+
 const getMovies = async () => {
   const res = await fetch(`${hostUrl}/movies`, {
+    method: 'GET',
+  });
+  return res.json();
+}
+
+const getInteractions = async () => {
+  const res = await fetch(`${hostUrl}/interactions`, {
     method: 'GET',
   });
   return res.json();

@@ -94,6 +94,15 @@ webapp.get('/users/getUser', async (req, resp) => {
       }
 });
 
+webapp.get('/users', async (req, resp) => {
+  try {
+    const result = await lib.getUsers(db);
+    resp.status(200).json({ message: JSON.stringify(result) });
+  } catch (err) {
+    resp.status(500).json({ error: 'error retrieving users' });
+  }
+});
+
 //get movie that the user has not interacted with yet
 webapp.get('/users/getNewMovie', async (req, resp) => {
   const { username } = req.query;
@@ -110,6 +119,44 @@ webapp.get('/users/getNewMovie', async (req, resp) => {
       }
 });
 
+//get friends
+webapp.get('/users/friendsList', async (req, resp) => {
+  const { username } = req.query;
+  try {
+      const myLikes = (await lib.getLikesByUser(db, username)).map(x => x.movie);
+      const allUsers = await lib.getAllUsers(db);
+      const allUserWithLikes = await Promise.all(allUsers.map(async (user) => {
+        const likes = await lib.getLikesByUser(db, user.username);
+        const likesMovies = likes.map(x => x.movie);
+        return {...user, likes: likesMovies};
+      }));
+      console.log(allUserWithLikes);
+      const allUsersMatches = allUserWithLikes.map((user) => { 
+        const matches = myLikes.filter(val => user.likes.includes(val));
+        return {...user, matches: matches, numMatches: matches.length};
+      });
+
+      const allUsersMatchesWithNames =  await Promise.all(allUsersMatches.map(async (user) => { 
+          const likesMoviesNames = await Promise.all(user.matches.map(async (movie) => {
+          const myMovie = await lib.getMovieByID(db, movie);
+          if (myMovie) {
+            return myMovie.title;
+          } else {
+            return myMovie;
+          }
+        }));
+        return {...user, movieMatches: likesMoviesNames};
+      }));
+
+
+      const result = allUsersMatchesWithNames.sort((a,b) => (a.numMatches < b.numMatches) ? 1 : -1);
+      resp.status(200).json({ data: result });
+      } catch (err) {
+        console.log(err);
+        resp.status(500).json({ error: 'error retrieving friends list' });
+      }
+});
+
 //add new interaction
 webapp.post('/newInteraction', async (req, resp) => {
   const { username, movie, interaction } = req.query;
@@ -119,6 +166,16 @@ webapp.post('/newInteraction', async (req, resp) => {
       } catch (err) {
         resp.status(500).json({ error: 'error creating new interaction' });
       }
+});
+
+webapp.get('/interactions', async (req, resp) => {
+  try {
+    const result = await lib.getInteractions(db);
+    resp.status(200).json({ message: JSON.stringify(result) });
+  } catch (err) {
+    resp.status(500).json({ error: 'try again later' });
+    console.log(err);
+  }
 });
 
 // GET USER - EITHER BY JUST USERNAME OR BY USERNAME & PASSWORD (FOR LOGIN)
