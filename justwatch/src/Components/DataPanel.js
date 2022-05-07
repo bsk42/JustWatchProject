@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./DataPanel.css";
 
 function DataPanel(props) {
@@ -11,9 +11,9 @@ function DataPanel(props) {
       <div className="name">
         { name }
       </div>
-      <div className="icon">
+      {/* <div className="icon">
         <FontAwesomeIcon icon="fa-solid fa-user" />
-      </div>
+      </div> */}
       <div className="data"> 
         <p className="data-text">{`Movies Liked: ${usageData.moviesLiked}`}</p>
         <p className="data-text">{`Movies Disliked: ${usageData.moviesDisliked}`}</p>

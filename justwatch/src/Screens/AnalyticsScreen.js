@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import DataPanel from "../Components/DataPanel";
-import { getInteractions, getUser, getUsers } from "../Services/fetcher";
+import { getInteractions, getUsers } from "../Services/fetcher";
 import { getLoggedInUser } from '../Modules/LoginLocalStorage';
 import { getUserStats, getAverageStats } from "../Utils/analyticsHelpers";
 import "./AnalyticsScreen.css";
@@ -14,23 +14,24 @@ function AnalyticsScreen(props) {
   const [userData, setUserData] = useState({});
 
   useEffect(() => {
-    getInteractions().then((data) => {
-      setAllInteractions(JSON.parse(data.message));
-    });
-    getUsers().then((data) => {
-      setAllUsers(JSON.parse(data.message));
-    });
-    setUserData(getUserStats(currUser, allInteractions));
+    async function getData() {
+      await getInteractions().then((data) => {
+        setAllInteractions(JSON.parse(data.message));
+      });
+      await getUsers().then((data) => {
+        setAllUsers(JSON.parse(data.message));
+      });
+      await setUserData(await getUserStats(currUser, allInteractions));
+    }
+    // getInteractions().then((data) => {
+    //   setAllInteractions(JSON.parse(data.message));
+    // });
+    // getUsers().then((data) => {
+    //   setAllUsers(JSON.parse(data.message));
+    // });
+    // setUserData(getUserStats(currUser, allInteractions));
+    getData();
   });
-
-  useEffect(() => {
-    setAvgData(getAverageStats(allInteractions, allUsers));
-  }, [allUsers]);
-
-  console.log(getUserStats(currUser, allInteractions));
-  console.log(getAverageStats(allInteractions, allUsers));
-
-  // console.log(currUser);
 
 
 
