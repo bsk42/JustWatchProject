@@ -29,6 +29,7 @@ webapp.get('/', (req, res) => {
 
 webapp.post('/register', async (req, resp) => {
   // check the name was provided
+  console.log(req.body)
   try {
     // console.log(req.body);
     const result = await lib.register(db, { username: req.body.username, name: req.body.name, email: req.body.email, password: req.body.password });
@@ -89,6 +90,33 @@ webapp.get('/users/getUser', async (req, resp) => {
         }
       } catch (err) {
         resp.status(500).json({ error: 'error retrieving user' });
+      }
+});
+
+//get movie that the user has not interacted with yet
+webapp.get('/users/getNewMovie', async (req, resp) => {
+  const { username } = req.query;
+  try {
+      const allIds = await lib.getMovieIds(db);
+      const interactions = await lib.getMovieInteractionsByUser(db, username);
+      const interactedMovies = interactions.map(x => x.movie);
+      const difference = allIds.filter(x => interactedMovies.indexOf(x) === -1);
+      const newMovie = await lib.getMovieByID(db, difference[0]);
+      resp.body =  JSON.stringify(newMovie);
+      resp.status(200).json({ data: JSON.stringify(newMovie) });
+      } catch (err) {
+        resp.status(500).json({ error: 'error retrieving movie' });
+      }
+});
+
+//add new interaction
+webapp.post('/newInteraction', async (req, resp) => {
+  const { username, movie, interaction } = req.query;
+  try {
+      await lib.newMovieInteract(db, username, movie, interaction);
+      resp.status(200).json({ message:  "new interaction added"});
+      } catch (err) {
+        resp.status(500).json({ error: 'error creating new interaction' });
       }
 });
 

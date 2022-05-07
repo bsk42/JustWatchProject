@@ -1,6 +1,45 @@
 import { useNavigate } from 'react-router-dom';
+import { getLoggedInUser } from '../Modules/LoginLocalStorage';
 
 const hostUrl = 'http://127.0.0.1:5005'
+
+
+async function getNewMovie() {
+  try{
+    const user = getLoggedInUser();
+      const response = await fetch(`${hostUrl}/users/getNewMovie?username=${user.username}`, 
+      {
+        method: 'GET',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+        });
+      const movieResponseData =  (await response.json());
+      const movieResponse = JSON.parse(movieResponseData.data);
+      const newMovie = {
+          id: movieResponse._id,
+          title: movieResponse.title,
+          description: movieResponse.plot,
+          image: movieResponse.image,
+          trailer: movieResponse.trailer.linkEmbed,
+          rating: movieResponse.imDbRating,
+      }
+      return newMovie;
+  }catch(error) {
+      console.log(error);
+      return [];
+  }
+}
+
+async function interactWithMovie(movie, interaction) {
+  try{
+    const user = getLoggedInUser();
+      await fetch(`${hostUrl}/newInteraction?username=${user.username}&movie=${movie}&interaction=${interaction}`, {method: 'POST'});
+  }catch(error) {
+      console.log(error);
+  }
+}
 
 const register = async (username, name, email, password) => {
   console.log(`${hostUrl}/register`);
@@ -99,4 +138,6 @@ export {
   getMovies,
   deleteUser,
   updateScore,
+  getNewMovie,
+  interactWithMovie
 }

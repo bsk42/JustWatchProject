@@ -52,6 +52,7 @@ beforeAll(async () => {
     db = await dbModule.connect(url);
 });
 
+
 test('addPlayer inserts a new player', async () =>{
     //call addPlayer
     await dbModule.register(db, player)
@@ -144,7 +145,7 @@ test('getMoviesAll', async () =>{
 
 test('cannot get all movies', async () =>{
     try{
-        da = 1
+        const da = 1
         const result = await dbModule.getMovies(da);
     } catch(err){    
         expect(err.message).toBe('could not find all movies');

@@ -2,21 +2,14 @@
  * @jest-environment jsdom
  */
  import { render, screen } from '@testing-library/react';
- import App from './App';
- // import renderer from 'react-test-renderer';
+ import '@testing-library/jest-dom/extend-expect';
  import '@testing-library/jest-dom';
- import Movieselection from './Movieselection';
+ import Movieselection from '../Screens/Movieselection';
 
  test('Superlike', () => {
     render(<Movieselection />);
     // userEvent.click(screen.getByText("Leaderboard"));
     expect(screen.getByText(/Superlike/i)).toBeVisible();
-})
-
-test('Title', () => {
-    render(<Movieselection />);
-    // userEvent.click(screen.getByText("Leaderboard"));
-    expect(screen.getByText(/JustWatch/i)).toBeVisible();
 })
 
 
