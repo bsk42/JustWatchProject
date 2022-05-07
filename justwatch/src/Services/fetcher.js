@@ -81,6 +81,17 @@ const updateScore = async (player, points) => {
   return res.json();
 }
 
+const getInteractions = async () => {
+  const res = await fetch (`${hostUrl}/interactions`, {
+    method: 'GET',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+  });
+  return res.json();
+}
+
 export {
   register,
   // login,

@@ -102,9 +102,18 @@ async function movieInteract(db, username, movie, interaction) {
   }
 }
 
+// MAY NEED TO REMOVE
+async function getInteractions(db) {
+  try {
+    return await db.collection('Interactions').find({}).toArray();
+  } catch (err) {
+    throw new Error('could not find all interactions');
+  }
+}
+
 
 module.exports = {
-  connect, register, login, getMovies, getMovieByID, getUser, getFriends, addFriend, movieInteract, deleteUser
+  connect, register, login, getMovies, getMovieByID, getUser, getFriends, addFriend, movieInteract, deleteUser, getInteractions,
 };
 
 connect('mongodb+srv://cis350Final:cis350Final@cluster0.gq1yt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority');

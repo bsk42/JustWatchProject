@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import { register } from '../../src/fetcher';
+import { register } from '../../src/Services/fetcher';
 import React, { useState } from 'react';
 
 import './Register.css';

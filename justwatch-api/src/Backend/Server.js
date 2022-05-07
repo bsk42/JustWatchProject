@@ -166,6 +166,16 @@ webapp.delete('/delete/:player', async (req, resp) => {
 //   }
 // });
 
+// MAY NEED TO REMOVE
+webapp.get('/interactions', async (req, resp) => {
+  try {
+    const result = await lib.getInteractions(db);
+    resp.status(200).json({ message: JSON.stringify(result) });
+  } catch (err) {
+    resp.status(500).json({ error: 'try again later' });
+  }
+});
+
 // Default response for any other request
 webapp.use((_req, res) => {
   res.status(404);
