@@ -150,6 +150,8 @@ async function sendMessage(db, user1, user2, message) {
     messages.push(message);
     await db.collections('Messages').findOneAndReplace({users: {$all: [user1, user2]}}, {users: [user1, user2], content: messages});
   } catch (err) {
+  }
+}
     
 async function getInteractions(db) {
   try {
@@ -204,7 +206,10 @@ module.exports = {
   getMovieInteractionsByUser,
   getMovieIds,
   getLikesByUser,
-  getInteractions
+  getInteractions,
+  startConversation,
+  fetchMessages,
+  getUsers
 };
 
 connect('mongodb+srv://cis350Final:cis350Final@cluster0.gq1yt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority');
