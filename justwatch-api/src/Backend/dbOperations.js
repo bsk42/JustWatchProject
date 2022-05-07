@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-vars */
 // 1. Import MongoDB driver
-const { waitFor } = require('@testing-library/react');
 const { MongoClient } = require('mongodb');
 
 // 2. Connect to the DB and return the connection object
