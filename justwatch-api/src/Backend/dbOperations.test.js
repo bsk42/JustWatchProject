@@ -90,6 +90,16 @@ test('getUser', async () =>{
     await dbModule.deleteUser(db, 'testuser');
 });
 
+test('getAllUser', async () =>{
+    const result = await dbModule.getAllUsers(db);
+    expect(result[0].username).toEqual('ben');
+});
+
+test('getUsers', async () =>{
+    const result = await dbModule.getUsers(db);
+    expect(result[0].username).toEqual('ben');
+});
+
 test('friends', async () =>{
     await dbModule.register(db, user1);
     await dbModule.register(db, user2);
@@ -110,7 +120,23 @@ test('friends', async () =>{
     }  
 });
 
+test('getFriends', async () =>{
+    await dbModule.register(db, user1);
+    await dbModule.register(db, user2);
 
+    const user1_result = await dbModule.getUser(db, 'user1');
+    const user2_result = await dbModule.getUser(db, 'user2');
+
+    try{
+        await dbModule.addFriend(db, user1_result.username, user2_result.username);
+        const results = await dbModule.getFriends(db, 'user1');
+        expect(results).toEqual('user2');
+        await db.collection('Friend').deleteMany({ from: 'user1'});
+        await db.collection('Friend').deleteMany({ from: 'user2'});
+    } catch(err){    
+        
+    }  
+});
 
 test('getMovie1', async () =>{
     //call addPlayer
@@ -210,8 +236,8 @@ test('startConvo', async () =>{
 
 
     try{
-        const result = await dbModule.startConversation(db, user1_result.username, user2_result.username, ['hi', 'hello']);
-        expect(result).toBe('hi');
+        const result = await dbModule.startConversation(db, user1_result.username, user2_result.username, []);
+        expect(result).toBe('');
     } catch(err){    
         
     }  
@@ -227,6 +253,14 @@ test('sendingMessages', async () =>{
     }   
 });
 
-
+test('fetchingMessages', async () =>{
+    try{
+        const message = await dbModule.fetchMessages(db, 'user1', 'user2');
+        expect(message[0]).toContain('hi');
+        //await db.collection('Messages').deleteMany({users: {$all: ['user1', 'user2']}});
+    } catch(err){    
+        
+    }   
+});
 
 
