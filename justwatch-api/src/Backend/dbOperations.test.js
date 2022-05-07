@@ -34,18 +34,17 @@ const user2 = {
    };
 
 const movie1 = {
-    _id: 'tt1877830',
-    rank: "1",
-    plot: "When the Riddler, a sadistic serial killer, begins murdering key polit...",
-    rankUpDown: "0",
-    title: "The Batman",
-    fullTitle: "The Batman (2022)",
+    _id: "tt8097030",
+    title: "Turning Red",
+    originalTitle: "",
+    fullTitle: "Turning Red (2022)",
+    type: "Movie",
     year: "2022",
-    image: "https://m.media-amazon.com/images/M/MV5BMDdmMTBiNTYtMDIzNi00NGVlLWIzMD...",
-    crew: "Matt Reeves (dir.), Robert Pattinson, Zoë Kravitz",
-    imDbRating: "8.4",
-    imDbRatingCount: "247929",
-    trailer: "https://www.imdb.com/video/imdb/vi3215114777/imdb/embed"
+    image: "https://imdb-api.com/images/original/MV5BNjY0MGEzZmQtZWMxNi00MWVhLWI4NWEtYjQ0MDkyYTJhMDU0XkEyXkFqcGdeQXVyODc0OTEyNDU@._V1_Ratio0.6751_AL_.jpg",
+    releaseDate: "2022-03-11",
+    runtimeMins: "100",
+    runtimeStr: "1h 40min",
+    plot: "A 13-year-old girl named Meilin turns into a giant red panda whenever she gets too excited."
 }
 
 beforeAll(async () => {
@@ -74,11 +73,11 @@ test('login returns user', async () =>{
  
 });
 
-test('login does returns user wrong password', async () =>{
+test('login returns user wrong password', async () =>{
     //call addPlayer
     try{
-        const result = await dbModule.login(db, 'testuser', 'password');
-     
+        await dbModule.login(db, 'testuser', 'wrongpassword');
+
     } catch(err){    
         expect(err.message).toBe('could not login');
     }  
@@ -155,6 +154,35 @@ test('cannot get all movies', async () =>{
         const result = await dbModule.getMovies(da);
     } catch(err){    
         expect(err.message).toBe('could not find all movies');
+    }  
+});
+
+test('interactions', async () =>{
+    await dbModule.register(db, user1);
+
+    const user1_result = await dbModule.getUser(db, 'user1');
+
+    try{
+        const result = await dbModule.newMovieInteract(db, user1_result.username, movie1._id, 'dislike');
+        expect(result.interaction).toEqual('dislike');
+        await db.collection('Interactions').deleteMany({ from: 'user1'});
+    } catch(err){    
+        
+    }  
+});
+
+test('interactions', async () =>{
+    await dbModule.register(db, user1);
+
+    const user1_result = await dbModule.getUser(db, 'user1');
+    await dbModule.newMovieInteract(db, user1_result.username, movie1._id, 'dislike');
+
+    try{
+        const result = await dbModule.getMovieInteractionsByUser(db, user1_result.username);
+        expect(result).toEqual('dislike');
+        await db.collection('Interactions').deleteMany({ from: 'user1'});
+    } catch(err){    
+        
     }  
 });
 
