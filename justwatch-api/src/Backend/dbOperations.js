@@ -99,6 +99,15 @@ async function addFriend(db, user1, user2) {
     }
 }
 
+async function startConversation(db, user1, user2) {
+  try {
+      const {insertedId} =  await db.collection('Messages').insertOne({users: [user1, user2], content:[] });
+      return insertedId;
+  } catch (err) {
+
+  }
+}
+
 //Movie interactions:
 //like, dislike, superlike
 async function newMovieInteract(db, username, movie, interaction) {
