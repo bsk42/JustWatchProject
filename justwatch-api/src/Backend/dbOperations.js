@@ -40,7 +40,6 @@ async function register(db, newUser){
     } catch (err) {
         throw new Error('could not add a player');
     }
-        
 };
 
 async function getUsers(db) {
