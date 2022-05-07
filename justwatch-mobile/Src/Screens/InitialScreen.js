@@ -14,7 +14,7 @@ function InitialScreen({ navigation }) {
   };
 
   const handleRegister = () => {
-   // navigator('/register');
+   navigation.navigate('RegisterScreen');
   };
 
   return (
