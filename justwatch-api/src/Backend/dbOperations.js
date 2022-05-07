@@ -60,14 +60,18 @@ async function getMovies(db) {
   try {
       return await db.collection('Movies').find({}).toArray();
   } catch (err) {
+    console.log(err);
     throw new Error('could not find all movies');
   }
 }
 
 async function getMovieByID(db, id) {
     try {
-    return await db.collection('Movies').findOne({_id: id});
+    const data = await db.collection('Movies').findOne({_id: id});
+    //console.log(data);
+    return data;
     } catch (err) {
+      console.log(err);
       throw new Error('could not find movie');
     }
   }

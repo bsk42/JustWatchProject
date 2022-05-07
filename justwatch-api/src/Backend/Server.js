@@ -117,14 +117,29 @@ webapp.get('/users/friendsList', async (req, resp) => {
       const allUsers = await lib.getAllUsers(db);
       const allUserWithLikes = await Promise.all(allUsers.map(async (user) => {
         const likes = await lib.getLikesByUser(db, user.username);
-        return {...user, likes: likes.map(x => x.movie)};
+        const likesMovies = likes.map(x => x.movie);
+        return {...user, likes: likesMovies};
       }));
       console.log(allUserWithLikes);
       const allUsersMatches = allUserWithLikes.map((user) => { 
         const matches = myLikes.filter(val => user.likes.includes(val));
         return {...user, matches: matches, numMatches: matches.length};
       });
-      const result = allUsersMatches.sort((a,b) => (a.numMatches < b.numMatches) ? 1 : -1);
+
+      const allUsersMatchesWithNames =  await Promise.all(allUsersMatches.map(async (user) => { 
+          const likesMoviesNames = await Promise.all(user.matches.map(async (movie) => {
+          const myMovie = await lib.getMovieByID(db, movie);
+          if (myMovie) {
+            return myMovie.title;
+          } else {
+            return myMovie;
+          }
+        }));
+        return {...user, movieMatches: likesMoviesNames};
+      }));
+
+
+      const result = allUsersMatchesWithNames.sort((a,b) => (a.numMatches < b.numMatches) ? 1 : -1);
       resp.status(200).json({ data: result });
       } catch (err) {
         console.log(err);

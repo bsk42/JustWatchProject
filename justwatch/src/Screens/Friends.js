@@ -65,7 +65,7 @@ function Friends() {
                                         <h4>{user.name}</h4>
                                         <p>Email: {user.email}</p>
                                         <p>Number Matches: {user.numMatches}</p>
-                                        <p>Movies you both like: {user.matches.toString()}</p>
+                                        <p>Movies you both like: {user.movieMatches}</p>
                                     </div>
                                     <div className="user-action">
                                         <button className="messageButton" onClick={goToMessage}>Message</button>
