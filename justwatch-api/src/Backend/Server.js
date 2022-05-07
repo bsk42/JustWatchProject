@@ -149,6 +149,7 @@ webapp.get('/users/friendsList', async (req, resp) => {
 
 
       const result = allUsersMatchesWithNames.sort((a,b) => (a.numMatches < b.numMatches) ? 1 : -1);
+      result.shift();
       resp.status(200).json({ data: result });
       } catch (err) {
         console.log(err);
