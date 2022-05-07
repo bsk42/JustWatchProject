@@ -42,19 +42,21 @@ function MovieSelectionScreen({ navigation }) {
 
 
   return (
-    <View>
+    <ScrollView>
+        <Text style={{fontSize: 20, fontWeight: "bold", textAlign: "center"}}>{currentMovie.title}</Text>
         <Image source={{uri: currentMovie.image}} style={{width: 120, height: 200, justifyContent: 'center' }} />
-        <Text>{currentMovie.title}</Text>
         <Text>{currentMovie.description}</Text>
         <Text>IMDB Rating: {currentMovie.rating}/10</Text>
         <WebView
-        source={currentMovie.trailer}
-        style={{ marginTop: 20 }}
+        source={{uri: currentMovie.trailer }}
+        style={{width: '95%', height: 200, justifyContent: 'center', marginTop: 20 }}
+        allowsInlineMediaPlayback={true}
+        mediaPlaybackRequiresUserAction={true}
       />
-      <Button title="like"/>
-      <Button title="dislike"/>
-      <Button title="superlike"/>
-    </View>
+      <Button title="like" onPress={() => {interactMovie("like")}}/>
+      <Button title="dislike" onPress={() => {interactMovie("dislike")}}/>
+      <Button title="superlike" onPress={() => {interactMovie("like")}}/>
+    </ScrollView>
   );
 }
 
