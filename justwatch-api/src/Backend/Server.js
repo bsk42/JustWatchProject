@@ -29,6 +29,7 @@ webapp.get('/', (req, res) => {
 
 webapp.post('/register', async (req, resp) => {
   // check the name was provided
+  console.log(req.body)
   try {
     // console.log(req.body);
     const result = await lib.register(db, { username: req.body.username, name: req.body.name, email: req.body.email, password: req.body.password });

@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getUser } from '../Services/fetcher';
 import { setLoggedInUser } from '../Modules/LoginLocalStorage';
+
 import './Login.css';
 
 function Login() {
@@ -64,6 +65,7 @@ function Login() {
         className="button" 
         type="submit"
         onClick={() => loginUser(username, password)}
+
       >
         Login
       </button>
