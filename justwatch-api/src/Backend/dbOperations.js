@@ -82,6 +82,15 @@ async function getUser(db, username) {
     }
 }
 
+async function getAllUsers(db) {
+  try {
+      const res = await db.collection('Users').find({}).toArray();
+      return res;
+  } catch (err) {
+      throw new Error('could not find users');
+  }
+}
+
 async function getFriends(db, username) {
     try {
       return await db.collection('Friends').find({from: username}).toArray();
@@ -119,8 +128,30 @@ async function getMovieInteractionsByUser(db, username) {
 }
 
 
+async function getLikesByUser(db, username) {
+  try {
+      return await db.collection('Interactions').find({username: username, interaction: "like"}).toArray();
+  } catch (err) {
+
+  }
+}
+
+
 module.exports = {
-  connect, register, login, getMovies, getMovieByID, getUser, getFriends, addFriend, newMovieInteract, deleteUser,getMovieInteractionsByUser,getMovieIds
+  connect, 
+  register, 
+  login, 
+  getMovies, 
+  getMovieByID, 
+  getUser, 
+  getAllUsers,
+  getFriends, 
+  addFriend, 
+  newMovieInteract, 
+  deleteUser,
+  getMovieInteractionsByUser,
+  getMovieIds,
+  getLikesByUser
 };
 
 connect('mongodb+srv://cis350Final:cis350Final@cluster0.gq1yt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority');
