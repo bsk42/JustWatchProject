@@ -150,10 +150,9 @@ const updateScore = async (player, points) => {
 
 
 // retrieves all the messages
-const getMessages = async () =>{
+const getMessages = async (from, to) =>{
   try{
-      const currentUser = getLoggedInUser();
-      const response = await fetch(`${hostUrl}/messages?username=${currentUser.username}`);
+      const response = await fetch(`${hostUrl}/messages?username1=${from}?username2=${to}`);
       return response.data.data;
   }
   catch(err){
