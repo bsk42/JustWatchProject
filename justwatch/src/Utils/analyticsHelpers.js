@@ -10,25 +10,25 @@ export async function getUserStats(currUser, allInteractions) {
 }
 
 export async function getAllUserStats(allInteractions, allUsers) {
-  const allUsernames = await allUsers.map(user => user.username).filter(username => username !== null);
-  return allUsernames.map(username => getUserStats(username, allInteractions));
+  const allUsernames = allUsers.map(user => user.username).filter(username => username !== null);
+  return await Promise.all(allUsernames.map(username => getUserStats(username, allInteractions)));
+}
+
+/*
+[{
+  'moviesLiked': 1,
+  'moviesDisliked': 2,
+  'moviesSuperliked': 3,
+}]
+*/
+
+function getAvgValue(arr, prop) {
+  console.log(arr);
+  return Math.round((arr.reduce((total, next) => total + next[prop], 0) / arr.length) * 100) / 100;
 }
   
-export async function getAverageStats(allInteractions, allUsers) {
-  const interactionUsers = allInteractions.map(inter => inter.username);
-  interactionUsers.map(user => getUserStats(user));
-  console.log(interactionUsers);
-  return 1;
-    //   const interactionUserSet = interactionUsers.filter((val, idx, arr) => arr.indexOf(val) === idx);
-    //   const allUsersSet = allUsers.map(user => user.username).filter((val, idx, arr) => arr.indexOf(val) === idx);
-    //   const userUnion = [...new Set([...interactionUserSet, ...allUsersSet])];
-    //   let allUserStats = [];
-    //   for (let i = 0; i < userUnion.length; ++i) {
-    //     let currUser = userUnion[i];
-    //     let currUserStats = getUserStats(currUser, allInteractions);
-    //     allUserStats.push(currUserStats);
-    //   }
-    //   return {'moviesLiked': allUserStats.map(obj => obj.like).reduce((a, b) => a + b) / allUserStats.length,
-    //           'moviesDisliked': allUserStats.map(obj => obj.dislike).reduce((a, b) => a + b) / allUserStats.length,
-    //           'moviesSuperliked': allUserStats.map(obj => obj.superlike).reduce((a, b) => a + b) / allUserStats.length};
+export async function getAverageStats(allUserStats) {
+  return {'moviesLiked': getAvgValue(allUserStats, 'moviesLiked'),
+          'moviesDisliked': getAvgValue(allUserStats, 'moviesDisliked'),
+          'moviesSuperliked': getAvgValue(allUserStats, 'moviesSuperliked')}
 }

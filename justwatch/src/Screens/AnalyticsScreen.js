@@ -23,21 +23,11 @@ function AnalyticsScreen(props) {
         setAllUsers(JSON.parse(data.message));
       });
       await setUserData(await getUserStats(currUser, allInteractions));
+      await setAllUserStats(await getAllUserStats(allInteractions, allUsers));
+      await setAvgData(await getAverageStats(allUserStats));
     }
     getData();
   });
-
-  function testAverageStats(allInteractions, allUsers) {
-    const allUsernames = allUsers.map(user => user.username).filter(username => username !== null);
-    Promise.all(allUsernames.map(username => getUserStats(username, allInteractions))).then((data) => {
-      setAllUserStats(data);
-    });
-    return 1;
-  }
-
-  console.log(getAllUserStats(allInteractions, allUsers));  
-
-  // console.log(testAverageStats(allInteractions, allUsers));
 
   return (
     <div className="analytics-screen">
