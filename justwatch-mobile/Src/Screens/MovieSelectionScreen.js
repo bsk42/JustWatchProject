@@ -56,6 +56,7 @@ function MovieSelectionScreen({ navigation }) {
       <Button title="like" onPress={() => {interactMovie("like")}}/>
       <Button title="dislike" onPress={() => {interactMovie("dislike")}}/>
       <Button title="superlike" onPress={() => {interactMovie("like")}}/>
+      <Button title="Go To Friends" onPress={() => {navigation.navigate("FriendsScreen")}}/>
     </ScrollView>
   );
 }
