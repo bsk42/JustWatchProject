@@ -95,7 +95,7 @@ webapp.get('/users/getUser', async (req, resp) => {
 
 webapp.get('/users', async (req, resp) => {
   try {
-    const result = await lib.getUsers(db);
+    const result = await lib.getAllUsers(db);
     resp.status(200).json({ message: JSON.stringify(result) });
   } catch (err) {
     resp.status(500).json({ error: 'error retrieving users' });

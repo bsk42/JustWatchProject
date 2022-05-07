@@ -30,7 +30,7 @@ function AnalyticsScreen(props) {
   });
 
   return (
-    <div className="analytics-screen">
+    <div className="div">
       {/* <NavBar /> */}
       <div className="panel-container">
         <div className="average-stats">
