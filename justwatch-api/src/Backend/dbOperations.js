@@ -134,10 +134,10 @@ async function startConversation(db, user1, user2) {
   }
 }
 
-async function fetchMessages(db, user1) {
+async function fetchMessages(db, user1, user2) {
   try {
-    const results = await db.collections('Messages').find({users: user1});
-    return results;
+    const results = await db.collections('Messages').find({users: {$all: [user1, user2]}});
+    return results.content;
   } catch (err) {
 
   }

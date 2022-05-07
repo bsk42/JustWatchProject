@@ -247,7 +247,7 @@ webapp.delete('/delete/:player', async (req, resp) => {
 //Messaging support
 
 // messages endpoint - returns all the messages
-webapp.get('/messages:username', (req, resp) =>{
+webapp.get('/messages:username', async (req, resp) =>{
     try {
       const result = await lib.fetchMessages(db, req.params.username);
       resp.status(200).json({message: JSON.stringify(result)});
@@ -257,7 +257,7 @@ webapp.get('/messages:username', (req, resp) =>{
 
 // messages endpoint - sends a  new message
 // message format: from/to/content
-webapp.post('/messages', (req, resp) =>{
+webapp.post('/messages', async (req, resp) =>{
     //check the body
     if(!req.body.from || !req.body.to || !req.body.content){
         resp.status(400).json({error: 'missing message field(s)'});
