@@ -45,6 +45,13 @@ const updateScore = async (player, points) => {
   return res.json();
 }
 
+const getCommonMovies = async () => {
+  const res = await fetch (`${hostUrl}/friends`, {
+    method:'GET'
+  });
+  return res.json();
+}
+
 export {
   register,
   login,
