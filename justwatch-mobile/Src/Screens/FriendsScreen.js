@@ -88,7 +88,9 @@ function FriendsScreen({ navigation }) {
 
 
     return (
-        <View style={styles.mainView}>
+        <View>
+        <View>
+            <Button title="Go To Movie Selection" onPress={() => {navigation.navigate("MovieSelectionScreen")}}/>
           <Text style={{fontSize: 20, fontWeight: "bold", textAlign: "center"}}>Friends:</Text>
           <FlatList
             data={friendsList}
@@ -97,10 +99,13 @@ function FriendsScreen({ navigation }) {
                 <Text style={{fontSize: 16, fontWeight: "bold", padding: 5}}>{`${item.username}`}</Text>
                 <Text style={{padding: 5}}>{`Number likes in common: ${item.numMatches}`}</Text>
                 <Text style={{padding: 5}}>{`Movies in common: ${item.movieMatches}`}</Text>
+                <Button title="Message"/>
               </View>
             )}
             keyExtractor={(item) => item._id}
           />
+        </View>
+        
         </View>
     )
 
