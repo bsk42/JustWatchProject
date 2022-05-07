@@ -7,6 +7,7 @@ const webapp = express();
 
 // import database functions
 const lib = require('./dbOperations');
+const { json } = require('body-parser');
 
 const url = 'mongodb+srv://cis350Final:cis350Final@cluster0.gq1yt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 
@@ -182,6 +183,36 @@ webapp.delete('/delete/:player', async (req, resp) => {
   } catch (err) {
     resp.status(500).json({ error: 'try again later' });
   }
+});
+
+
+//Messaging support
+
+// messages endpoint - returns all the messages
+webapp.get('/messages:username', (req, resp) =>{
+    try {
+      const result = await lib.fetchMessages(db, req.params.username);
+      resp.status(200).json({message: JSON.stringify(result)});
+    } catch (err) {
+      resp.status(500).json({ error: 'try again later' });
+ }});
+
+// messages endpoint - sends a  new message
+// message format: from/to/content
+webapp.post('/messages', (req, resp) =>{
+    //check the body
+    if(!req.body.from || !req.body.to || !req.body.content){
+        resp.status(400).json({error: 'missing message field(s)'});
+        return;
+    }
+    //add the message to the list 
+    await lib.sendMessage(db, req.body.from, req.body.to,{
+      from: req.body.from,
+      to:req.body.to,
+      content:req.body.content,
+    });
+  
+    resp.status(201).json({receipt: 'ok'});
 });
 
 // Update Score

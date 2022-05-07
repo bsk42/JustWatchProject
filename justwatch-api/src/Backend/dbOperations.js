@@ -104,7 +104,26 @@ async function startConversation(db, user1, user2) {
       const {insertedId} =  await db.collection('Messages').insertOne({users: [user1, user2], content:[] });
       return insertedId;
   } catch (err) {
+  }
+}
 
+async function fetchMessages(db, user1) {
+  try {
+    const results = await db.collections('Messages').find({users: user1});
+    return results;
+  } catch (err) {
+
+  }
+}
+
+async function sendMessage(db, user1, user2, message) {
+  try {
+    const results = await db.collections('Messages').find({users: {$all: [user1, user2]}});
+    const messages = results.content;
+    messages.push(message);
+    await db.collections('Messages').findOneAndReplace({users: {$all: [user1, user2]}}, {users: [user1, user2], content: messages});
+  } catch (err) {
+    
   }
 }
 
@@ -129,7 +148,7 @@ async function getMovieInteractionsByUser(db, username) {
 
 
 module.exports = {
-  connect, register, login, getMovies, getMovieByID, getUser, getFriends, addFriend, newMovieInteract, deleteUser,getMovieInteractionsByUser,getMovieIds
+  connect, register, login, getMovies, getMovieByID, getUser, getFriends, addFriend, newMovieInteract, deleteUser,getMovieInteractionsByUser,getMovieIds, fetchMessages, sendMessage, startConversation
 };
 
 connect('mongodb+srv://cis350Final:cis350Final@cluster0.gq1yt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority');
