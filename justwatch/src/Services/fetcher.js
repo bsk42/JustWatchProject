@@ -191,5 +191,8 @@ export {
   getNewMovie,
   interactWithMovie,
   getMessages,
-  sendMessage
+  sendMessage,
+  getInteractions,
+  getUsers,
+  getFriendsList
 }
