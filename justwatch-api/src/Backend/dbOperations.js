@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 // 1. Import MongoDB driver
+const { waitFor } = require('@testing-library/react');
 const { MongoClient } = require('mongodb');
 
 // 2. Connect to the DB and return the connection object
@@ -128,8 +129,11 @@ async function addFriend(db, user1, user2) {
 
 async function startConversation(db, user1, user2) {
   try {
-      const {insertedId} =  await db.collection('Messages').insertOne({users: [user1, user2], content:[] });
+      const result = await db.collection('Messages').findOne({users: {$all: [user1, user2]}});
+      if (result == null) {
+      const {insertedId} =  await db.collection('Messages').insertOne({users: [user1, user2], content:[''] });
       return insertedId;
+      }
   } catch (err) {
   }
 }
@@ -145,8 +149,9 @@ async function fetchMessages(db, user1, user2) {
 
 async function sendMessage(db, user1, user2, message) {
   try {
-    const results = await db.collection('Messages').find({users: {$all: [user1, user2]}});
+    const results = await db.collection('Messages').findOne({users: {$all: [user1, user2]}});
     const messages = results.content;
+    console.log(messages);
     messages.push(message);
     await db.collection('Messages').findOneAndReplace({users: {$all: [user1, user2]}}, {users: [user1, user2], content: messages});
   } catch (err) {
