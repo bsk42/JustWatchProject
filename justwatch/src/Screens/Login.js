@@ -36,9 +36,6 @@ function Login() {
     <div className="div">
       <div className="div-2">
         <div className="builder-columns div-3">
-          <div className="builder-column column">
-            <div className="div-4">Just Watch</div>
-          </div>
         </div>
       </div>
       <form className="form">
