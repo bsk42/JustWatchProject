@@ -8,6 +8,11 @@ export async function getUserStats(currUser, allInteractions) {
           'moviesDisliked': getValFreq(userInteractions, 'interaction', 'dislike'),
           'moviesSuperliked': getValFreq(userInteractions, 'interaction', 'superlike')}
 }
+
+export async function getAllUserStats(allInteractions, allUsers) {
+  const allUsernames = await allUsers.map(user => user.username).filter(username => username !== null);
+  return allUsernames.map(username => getUserStats(username, allInteractions));
+}
   
 export async function getAverageStats(allInteractions, allUsers) {
   const interactionUsers = allInteractions.map(inter => inter.username);

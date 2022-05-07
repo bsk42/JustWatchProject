@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import DataPanel from "../Components/DataPanel";
 import { getInteractions, getUsers } from "../Services/fetcher";
 import { getLoggedInUser } from '../Modules/LoginLocalStorage';
-import { getUserStats, getAverageStats } from "../Utils/analyticsHelpers";
+import { getUserStats, getAllUserStats, getAverageStats } from "../Utils/analyticsHelpers";
 import "./AnalyticsScreen.css";
 
 function AnalyticsScreen(props) {
@@ -12,6 +12,7 @@ function AnalyticsScreen(props) {
   const [allUsers, setAllUsers] = useState([]);
   const [avgData, setAvgData] = useState({});
   const [userData, setUserData] = useState({});
+  const [allUserStats, setAllUserStats] = useState([]);
 
   useEffect(() => {
     async function getData() {
@@ -23,33 +24,20 @@ function AnalyticsScreen(props) {
       });
       await setUserData(await getUserStats(currUser, allInteractions));
     }
-    // getInteractions().then((data) => {
-    //   setAllInteractions(JSON.parse(data.message));
-    // });
-    // getUsers().then((data) => {
-    //   setAllUsers(JSON.parse(data.message));
-    // });
-    // setUserData(getUserStats(currUser, allInteractions));
     getData();
   });
 
+  function testAverageStats(allInteractions, allUsers) {
+    const allUsernames = allUsers.map(user => user.username).filter(username => username !== null);
+    Promise.all(allUsernames.map(username => getUserStats(username, allInteractions))).then((data) => {
+      setAllUserStats(data);
+    });
+    return 1;
+  }
 
+  console.log(getAllUserStats(allInteractions, allUsers));  
 
-  // const sampleAvgData = {
-  //   weeklyAppUsage: "20 minutes",
-  //   moviesLiked: 10,
-  //   moviesDisliked: 20,
-  //   moviesSuperliked: 2,
-  //   numGroups: 3,
-  // }
-
-  // const sampleUserData = {
-  //   weeklyAppUsage: "40 minutes",
-  //   moviesLiked: 15,
-  //   moviesDisliked: 12,
-  //   moviesSuperliked: 4,
-  //   numGroups: 5,
-  // }
+  // console.log(testAverageStats(allInteractions, allUsers));
 
   return (
     <div className="analytics-screen">
