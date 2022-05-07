@@ -41,27 +41,138 @@ webapp.post('/register', async (req, resp) => {
   }
 });
 
-webapp.get('/login/:username/:password', async (req, resp) => {
-  // check the name was provided
-  try {
-    const result = await lib.login(db, req.params.username, req.params.password)
-    // send the response
-    resp.status(200).json({ message: JSON.stringify(result) });
-    console.log('questions fetched');
-  } catch (err) {
-    resp.status(500).json({ error: 'error logging in' });
-  }
-});
+// webapp.post('/login', async (req, resp) => {
+//   // check the name was provided
+//   console.log('in server for login');
+//   try {
+//     const result = await lib.login(db, req.body.username, req.body.password);
+//     // send the response
+//     resp.status(201).json({ message: JSON.stringify(result) });
+//     console.log('user logged in');
+//   } catch (err) {
+//     resp.status(500).json({ error: 'error logging in' });
+//   }
+// });
 
 webapp.get('/movies', async (req, resp) => {
   try {
-    const result = await lib.getMovies();
+    const result = await lib.getMovies(db);
     resp.status(200).json({ message: JSON.stringify(result) });
-    console.log('leaders fetched');
   } catch (err) {
     resp.status(500).json({ error: 'try again later' });
+    console.log(err);
   }
 });
+
+webapp.get('/movies/:id', async (req, resp) => {
+  try {
+    const result = await lib.getMovieByID(db, req.params.id);
+    resp.status(200).json({ message: `Movie with id ${JOSN.stringify(result.id)} received` });
+    console.log(`movie with id ${JOSN.stringify(result.id)} received`);
+  } catch (err) {
+    resp.status(500).json({ error: 'error retrieving movie' });
+  }
+});
+
+webapp.get('/users/getUser', async (req, resp) => {
+  const { username, password } = req.query;
+  try {
+        // LOGIN IF PASSWORD PROVIDED
+        if (password) {
+          result = await lib.login(db, username, password);
+        } else {
+          result = await lib.getUser(db, username);
+        }
+        if (result == null) {
+          resp.status(404).json({ error: 'user not found' });
+        } else {
+          resp.status(200).json({ message: JSON.stringify(result) });
+        }
+      } catch (err) {
+        resp.status(500).json({ error: 'error retrieving user' });
+      }
+});
+
+//get movie that the user has not interacted with yet
+webapp.get('/users/getNewMovie', async (req, resp) => {
+  const { username } = req.query;
+  try {
+      const allIds = await lib.getMovieIds(db);
+      const interactions = await lib.getMovieInteractionsByUser(db, username);
+      const interactedMovies = interactions.map(x => x.movie);
+      const difference = allIds.filter(x => interactedMovies.indexOf(x) === -1);
+      const newMovie = await lib.getMovieByID(db, difference[0]);
+      resp.body =  JSON.stringify(newMovie);
+      resp.status(200).json({ data: JSON.stringify(newMovie) });
+      } catch (err) {
+        resp.status(500).json({ error: 'error retrieving movie' });
+      }
+});
+
+//add new interaction
+webapp.post('/newInteraction', async (req, resp) => {
+  const { username, movie, interaction } = req.query;
+  try {
+      await lib.newMovieInteract(db, username, movie, interaction);
+      resp.status(200).json({ message:  "new interaction added"});
+      } catch (err) {
+        resp.status(500).json({ error: 'error creating new interaction' });
+      }
+});
+
+// GET USER - EITHER BY JUST USERNAME OR BY USERNAME & PASSWORD (FOR LOGIN)
+// webapp.get('/users/getUser', async (req, resp) => {
+//   //const { username, password } = req.query;
+//   console.log("ran");
+//   resp.status(200);
+//   // try {
+//   //   const result = null;
+//   //   // LOGIN IF PASSWORD PROVIDED
+//   //   if (password) {
+//   //     result = await lib.login(db, username, password);
+//   //   } else {
+//   //     result = await lib.getUser(db, username);
+//   //   }
+//   //   if (result == null) {
+//   //     resp.status(404).json({ error: 'user not found' });
+//   //   } else {
+//   //     resp.status(200).json({ message: JSON.stringify(result) });
+//   //   }
+//   // } catch (err) {
+//   //   resp.status(500).json({ error: 'error retrieving user' });
+//   // }
+// });
+
+webapp.get('/users/friends/:username', async (req, resp) => {
+  try {
+    const result = await lib.getFriends(db, req.params.username);
+    resp.status(200).json({ message: JSON.stringify(result) });
+  } catch (err) {
+    resp.status(500).json({ error: 'error retrieving friends' });
+  }
+});
+
+webapp.post('/users/addFriend', async (req, resp) => {
+  try {
+    const result = lib.addFriend(db, 
+      {username: req.body.username1, email: req.body.email1},
+      {username: req.body.username2, email: req.body.email2});
+      resp.status(201).json({ message: `User 1 added User 2 as a friend` }); // make more descriptive message
+      console.log('friend added');
+  } catch (err) {
+    resp.status(500).json({ error: 'failed to add friend' });
+  }
+});
+
+webapp.post('/movies/interact', async (req, res) => {
+  try {
+    const result = lib.movieInteract(db, req.body.username, req.body.movie_id, interaction);
+    resp.status(201).json({ message: `${req.body.username} had reaction: ${req.body.interaction} to movie ${req.body.movie_id}` });
+    console.log('movie reaction');
+  } catch (err) {
+    resp.status(500).json({ error: 'failed to complete interaction' });
+  }
+})
 
 webapp.delete('/delete/:player', async (req, resp) => {
   try {
@@ -74,14 +185,14 @@ webapp.delete('/delete/:player', async (req, resp) => {
 });
 
 // Update Score
-webapp.put('/leaders', async (req, resp) => {
-  try {
-    const result = await lib.updateScore(db, req.body.player, req.body.points);
-    resp.status(200).json({ message: JSON.stringify(result) });
-  } catch (err) {
-    resp.status(500).json({ error: 'try again later' });
-  }
-});
+// webapp.put('/leaders', async (req, resp) => {
+//   try {
+//     const result = await lib.updateScore(db, req.body.player, req.body.points);
+//     resp.status(200).json({ message: JSON.stringify(result) });
+//   } catch (err) {
+//     resp.status(500).json({ error: 'try again later' });
+//   }
+// });
 
 // Default response for any other request
 webapp.use((_req, res) => {
