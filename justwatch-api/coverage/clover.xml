@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1651956952931" clover="3.2.0">
-  <project timestamp="1651956952931" name="All files">
+<coverage generated="1651956988264" clover="3.2.0">
+  <project timestamp="1651956988264" name="All files">
     <metrics statements="75" coveredstatements="48" conditionals="4" coveredconditionals="3" methods="20" coveredmethods="13" elements="99" coveredelements="64" complexity="0" loc="75" ncloc="75" packages="1" files="1" classes="1"/>
     <file name="dbOperations.js" path="/Users/aruhl/Documents/GitHub/JustWatchProject/justwatch-api/src/Backend/dbOperations.js">
       <metrics statements="75" coveredstatements="48" conditionals="4" coveredconditionals="3" methods="20" coveredmethods="13"/>
@@ -18,9 +18,9 @@
       <line num="30" count="8" type="stmt"/>
       <line num="31" count="8" type="stmt"/>
       <line num="33" count="8" type="cond" truecount="2" falsecount="0"/>
-      <line num="35" count="1" type="stmt"/>
-      <line num="36" count="1" type="stmt"/>
-      <line num="37" count="1" type="stmt"/>
+      <line num="35" count="3" type="stmt"/>
+      <line num="36" count="3" type="stmt"/>
+      <line num="37" count="3" type="stmt"/>
       <line num="41" count="0" type="stmt"/>
       <line num="47" count="0" type="stmt"/>
       <line num="48" count="0" type="stmt"/>

@@ -210,8 +210,8 @@ test('startConvo', async () =>{
 
 
     try{
-        const result = await dbModule.startConversation(db, user1_result.username, user2_result.username, ['hi', 'hello']);
-        expect(result).toBe('hi');
+        const result = await dbModule.startConversation(db, user1_result.username, user2_result.username, []);
+        expect(result).toBe('');
     } catch(err){    
         
     }  
