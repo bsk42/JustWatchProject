@@ -28,9 +28,15 @@ async function login(db, username, password) {
 
 async function register(db, newUser){
     try {
-        const result = await db.collection('Users').insertOne(newUser);
-        console.log(`Created player with id: ${result.insertedId}`);
-        return result;
+        const user = await db.collection('Users').findOne({username: newUser.username});
+        //console.log(user);
+        if (user === null) {
+
+          const result = await db.collection('Users').insertOne(newUser);
+          console.log(`Created player with id: ${result.insertedId}`);
+          return result;
+        }
+        //return 'user already exists'
     } catch (err) {
         throw new Error('could not add a player');
     }
