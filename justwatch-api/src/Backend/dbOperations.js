@@ -37,6 +37,14 @@ async function register(db, newUser){
         
 };
 
+async function getUsers(db) {
+  try {
+    return await db.collection('Users').find({}).toArray();
+  } catch (err) {
+    throw new Error('could not find all users')
+  }
+}
+
 // delete player
 async function deleteUser(db, username) {
   try {
@@ -99,6 +107,14 @@ async function addFriend(db, user1, user2) {
     }
 }
 
+async function getInteractions(db) {
+  try {
+    return await db.collection('Interactions').find({}).toArray();
+  } catch (err) {
+    throw new Error('could not find all interactions');
+  }
+}
+
 //Movie interactions:
 //like, dislike, superlike
 async function newMovieInteract(db, username, movie, interaction) {
@@ -120,7 +136,7 @@ async function getMovieInteractionsByUser(db, username) {
 
 
 module.exports = {
-  connect, register, login, getMovies, getMovieByID, getUser, getFriends, addFriend, newMovieInteract, deleteUser,getMovieInteractionsByUser,getMovieIds
+  connect, register, login, getMovies, getMovieByID, getUser, getFriends, addFriend, newMovieInteract, deleteUser,getMovieInteractionsByUser,getMovieIds, getInteractions, getUsers
 };
 
 connect('mongodb+srv://cis350Final:cis350Final@cluster0.gq1yt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority');

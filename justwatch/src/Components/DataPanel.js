@@ -15,11 +15,9 @@ function DataPanel(props) {
         <FontAwesomeIcon icon="fa-solid fa-user" />
       </div>
       <div className="data"> 
-        <p className="data-text">{`Weekly App Usage: ${usageData.weeklyAppUsage}`}</p>
         <p className="data-text">{`Movies Liked: ${usageData.moviesLiked}`}</p>
         <p className="data-text">{`Movies Disliked: ${usageData.moviesDisliked}`}</p>
         <p className="data-text">{`Movies Superliked: ${usageData.moviesSuperliked}`}</p>
-        <p className="data-text">{`Number of Groups: ${usageData.numGroups}`}</p>
       </div>
     </div>
   );

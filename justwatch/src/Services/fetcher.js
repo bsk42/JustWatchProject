@@ -91,8 +91,22 @@ const getUser = async (username, password) => {
   return res.json();
 }
 
+const getUsers = async (username, password) => {
+  const res = await fetch(`${hostUrl}/users`, {
+    method: 'GET',
+  });
+  return res.json();
+}
+
 const getMovies = async () => {
   const res = await fetch(`${hostUrl}/movies`, {
+    method: 'GET',
+  });
+  return res.json();
+}
+
+const getInteractions = async () => {
+  const res = await fetch(`${hostUrl}/interactions`, {
     method: 'GET',
   });
   return res.json();
@@ -128,5 +142,7 @@ export {
   deleteUser,
   updateScore,
   getNewMovie,
-  interactWithMovie
+  interactWithMovie,
+  getInteractions,
+  getUsers,
 }
