@@ -33,35 +33,30 @@ function Movieselection() {
 
   return (
     <div className="div">
-      <div className="div-3">
-        {/* <div className="builder-columns div-4"> */}
+      <div className="rightHalf">
           <div className="builder-column column">
             <div className="title">{currentMovie.title}</div>
             <p className="borat-2006-adventure-1-h-24">
             {currentMovie.description}
             </p>
-          {/* </div> */}
         </div>
         <div className="div-9">Reviews</div>
         <div className="div-10">
           <div className="screen-shot-2022-02-23-at-3-17">
-            <p>
+            <p className="ratingText">
             IMDB Rating: {currentMovie.rating}/10
             </p>
           </div>
         </div>
         <div className="div-11">Trailer</div>
-        {/* <div className="div-12"> */}
 
           <iframe className="trailer" src={currentMovie.trailer}  title="Trailer" allowFullScreen="true" mozallowfullscreen="true" webkitallowfullscreen="true" frameBorder="no" scrolling="no">
             <div className="builder-image-sizer image-sizer-2" />
           </iframe>
-            
-
-        {/* </div> */}
+        
       </div>
       <div className="div-movie-pic">
-        <img src={currentMovie.image} alt="hi" />
+        <img className="movieImage" src={currentMovie.image} alt="hi" />
       </div>
       <div className="column-2">
         <button className="button" type="submit" onClick={() => {interactMovie("like")}}>Like</button>
