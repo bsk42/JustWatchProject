@@ -131,7 +131,7 @@ async function startConversation(db, user1, user2) {
   try {
       const result = await db.collection('Messages').findOne({users: {$all: [user1, user2]}});
       if (result == null) {
-      const {insertedId} =  await db.collection('Messages').insertOne({users: [user1, user2], content:[''] });
+      const {insertedId} =  await db.collection('Messages').insertOne({users: [user1, user2], content:[] });
       return insertedId;
       }
   } catch (err) {
@@ -140,7 +140,7 @@ async function startConversation(db, user1, user2) {
 
 async function fetchMessages(db, user1, user2) {
   try {
-    const results = await db.collection('Messages').find({users: {$all: [user1, user2]}});
+    const results = await db.collection('Messages').findOne({users: {$all: [user1, user2]}});
     return results.content;
   } catch (err) {
 
