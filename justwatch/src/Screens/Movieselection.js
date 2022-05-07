@@ -61,7 +61,7 @@ function Movieselection() {
       <div className="column-2">
         <button className="button" type="submit" onClick={() => {interactMovie("like")}}>Like</button>
         <button className="button" type="submit" onClick={() => {interactMovie("dislike")}}>Dislike</button>
-        <button className="button" type="submit" onClick={() => {interactMovie("superlike")}}>SuperLike</button>
+        <button className="button" type="submit" onClick={() => {interactMovie("like")}}>SuperLike</button>
       </div>
     </div>
 
