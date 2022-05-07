@@ -247,9 +247,13 @@ webapp.delete('/delete/:player', async (req, resp) => {
 //Messaging support
 
 // messages endpoint - returns all the messages
-webapp.get('/messages/:username1/:username2', async (req, resp) =>{
+webapp.get('/messages', async (req, resp) =>{
     try {
-      const result = await lib.fetchMessages(db, req.params.username1, req.params.username2);
+
+      console.log('getting messages server');
+      //console.log(req.params.username1);
+      await lib.startConversation(db, req.query.username1, req.query.username2);
+      const result = await lib.fetchMessages(db, req.query.username1, req.query.username2);
       resp.status(200).json({message: JSON.stringify(result)});
     } catch (err) {
       resp.status(500).json({ error: 'try again later' });

@@ -11,7 +11,6 @@ function Friends() {
     const navigator = useNavigate();
     
     function goToMessage(user) {
-        console.log(user.username);
         navigator('/messaging', {state: {
             username: user.username,
         }});

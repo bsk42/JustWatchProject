@@ -1,12 +1,14 @@
 import {useRef, useEffect, useState} from 'react';
 import { useLocation } from 'react-router-dom';
 import { getLoggedInUser } from '../Modules/LoginLocalStorage';
-import { getMessages } from '../Services/fetcher';
+import { getMessages, sendMessage } from '../Services/fetcher';
 import './Messaging.css';
 
 function Messaging(props) {
   let from = getLoggedInUser().username;
   let to = useLocation().state.username;
+  let content = useRef('');
+  
 
   // state for the messages
   const [messages, setmessages] = useState([]);
@@ -14,7 +16,8 @@ function Messaging(props) {
 
   useEffect(() =>{
     async function fetchmessages(){
-      const mesgs = await getMessages();
+      const mesgs = await getMessages(from, to);
+      console.log(from);
       // update the state
       setmessages(mesgs);
     }
@@ -25,11 +28,27 @@ function Messaging(props) {
       fetchmessages();
     }, 5000);
     
-  },[messages]);
+  });
+
+  const handleSendMessage = async(e) =>{
+    e.preventDefault();
+    await sendMessage(from, to, {sender: from, message: content.current});
+  }
 
   
 
   return (
+    <div>
+    <div>
+      <h2>Previous Messages</h2>
+      <div>{messages.map( msg => <p>{JSON.stringify(msg)}</p>)}</div>
+      <hr />
+    </div>
+    <h2>New Message</h2>
+    <textarea  cols="15" rows="5"  onChange={(e) => content.current = e.target.value}/>
+    <button type="button" onClick={(e) => handleSendMessage(e)}>Send</button>
+  </div>
+    /*
     <div className="div">
       
     <div className="chat">
@@ -56,6 +75,7 @@ function Messaging(props) {
       </div>
     </div>
   </div>
+  */
 
   );
 }
