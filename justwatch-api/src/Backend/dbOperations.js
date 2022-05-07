@@ -28,9 +28,15 @@ async function login(db, username, password) {
 
 async function register(db, newUser){
     try {
-        const result = await db.collection('Users').insertOne(newUser);
-        console.log(`Created player with id: ${result.insertedId}`);
-        return result;
+        const user = await db.collection('Users').findOne({username: newUser.username});
+        //console.log(user);
+        if (user === null) {
+
+          const result = await db.collection('Users').insertOne(newUser);
+          console.log(`Created player with id: ${result.insertedId}`);
+          return result;
+        }
+        //return 'user already exists'
     } catch (err) {
         throw new Error('could not add a player');
     }
@@ -68,14 +74,18 @@ async function getMovies(db) {
   try {
       return await db.collection('Movies').find({}).toArray();
   } catch (err) {
+    console.log(err);
     throw new Error('could not find all movies');
   }
 }
 
 async function getMovieByID(db, id) {
     try {
-    return await db.collection('Movies').findOne({_id: id});
+    const data = await db.collection('Movies').findOne({_id: id});
+    //console.log(data);
+    return data;
     } catch (err) {
+      console.log(err);
       throw new Error('could not find movie');
     }
   }
@@ -88,6 +98,15 @@ async function getUser(db, username) {
     } catch (err) {
         throw new Error('could not find user');
     }
+}
+
+async function getAllUsers(db) {
+  try {
+      const res = await db.collection('Users').find({}).toArray();
+      return res;
+  } catch (err) {
+      throw new Error('could not find users');
+  }
 }
 
 async function getFriends(db, username) {
@@ -135,8 +154,32 @@ async function getMovieInteractionsByUser(db, username) {
 }
 
 
+async function getLikesByUser(db, username) {
+  try {
+      return await db.collection('Interactions').find({username: username, interaction: "like"}).toArray();
+  } catch (err) {
+
+  }
+}
+
+
 module.exports = {
-  connect, register, login, getMovies, getMovieByID, getUser, getFriends, addFriend, newMovieInteract, deleteUser,getMovieInteractionsByUser,getMovieIds, getInteractions, getUsers
+
+  connect, 
+  register, 
+  login, 
+  getMovies, 
+  getMovieByID, 
+  getUser, 
+  getAllUsers,
+  getFriends, 
+  addFriend, 
+  newMovieInteract, 
+  deleteUser,
+  getMovieInteractionsByUser,
+  getMovieIds,
+  getLikesByUser,
+  getInteractions
 };
 
 connect('mongodb+srv://cis350Final:cis350Final@cluster0.gq1yt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority');

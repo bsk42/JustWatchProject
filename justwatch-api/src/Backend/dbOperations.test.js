@@ -52,6 +52,12 @@ beforeAll(async () => {
     db = await dbModule.connect(url);
 });
 
+afterAll(async () => {
+    dbModule.deleteUser(db, 'testuser');
+    dbModule.deleteUser(db, 'user1');
+    dbModule.deleteUser(db, 'user2');
+});
+
 
 test('addPlayer inserts a new player', async () =>{
     //call addPlayer
