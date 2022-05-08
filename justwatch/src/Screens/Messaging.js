@@ -12,14 +12,20 @@ function Messaging(props) {
 
   // state for the messages
   const [messages, setmessages] = useState([]);
-
+  let currentMessages = useRef('');
 
   useEffect(() =>{
     async function fetchmessages(){
       let result = await getMessages(from, to);
-      console.log('messages FE')
-      console.log(result);
+      //console.log('messages FE')
+     // console.log(result);
       setmessages(result);
+
+      if (messages !== currentMessages.current) {
+        currentMessages.current = messages;
+        alert('YOU GOT A NEW MESSAGE');
+      }
+
     }
 
     // we want to fetch the users frequently (5 s)
