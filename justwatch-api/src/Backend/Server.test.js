@@ -60,7 +60,7 @@ afterAll(async () => {
 });
 
 describe('/register endpoint tests',  ()=> {
-    test('/register endpoint status code and response 404', ()=>{
+    test('/register endpoint status code and response 500', ()=>{
         return request(webapp).post('/register')
         .send({player:'', points:3}).expect(500)
         .then((response)=> expect(JSON.parse(response.text).error).toBe('try again later'));
@@ -100,12 +100,50 @@ describe('/users get endpoint tests',  ()=> {
     }); 
 });
 
+describe('/users/getUser get endpoint tests',  ()=> {
+    test('status code 200 and response', () =>{
+        return request(webapp).get('/users/getUser')
+        .expect(200) // test the response status code
+    }); 
+});
+
 describe('/users/getNewMovie get endpoint tests',  ()=> {
     test('status code 200 and response', () =>{
         return request(webapp).get('/users/getNewMovie')
         .expect(200) // test the response status code
     }); 
 });
+
+describe('/users/friendsList get endpoint tests',  ()=> {
+    test('status code 200 and response', () =>{
+        return request(webapp).get('/users/friendsList')
+        .expect(200) // test the response status code
+    }); 
+});
+
+describe('/interactions get endpoint tests',  ()=> {
+    test('status code 200 and response', () =>{
+        return request(webapp).get('/interactions')
+        .expect(200) // test the response status code
+    }); 
+});
+
+describe('/newInteraction post endpoint tests',  ()=> {
+    test('/newInteraction endpoint status code and response 404', ()=>{
+        return request(webapp).post('/register')
+        .send({player:'', points:3}).expect(500)
+        .then((response)=> expect(JSON.parse(response.text).error).toBe('try again later'));
+    });
+
+     test('status code 201 and response', () =>{
+        return request(webapp).post('/register')
+        .send(player)
+        .expect(201) // test the response status code
+         // process the response
+        .then((response)=> expect(JSON.parse(response.text).message).toContain('Player with username'));
+    }); 
+});
+
 
 
 describe('/delete endpoint tests',  ()=> {
