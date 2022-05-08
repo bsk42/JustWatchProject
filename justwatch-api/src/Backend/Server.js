@@ -19,7 +19,7 @@ webapp.use(
     extended: true,
   }),
 );
-webapp.use(cors({ credentials: true, origin: ['http://localhost:3000'] }));
+webapp.use(cors({ credentials: true, origin: ['http://localhost:5005'] }));
 
 // Root endpoint
 webapp.get('/', (req, res) => {
