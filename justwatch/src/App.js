@@ -11,6 +11,6 @@ function App() {
       <InitialScreen />
     </div>
   );
-}
+} 
 
 export default App;
