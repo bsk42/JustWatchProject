@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">66.89% </span>
+                <span class="strong">75.17% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>97/145</span>
+                <span class='fraction'>109/145</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">60.71% </span>
+                <span class="strong">75% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>17/28</span>
+                <span class='fraction'>21/28</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">67.62% </span>
+                <span class="strong">75.53% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>94/139</span>
+                <span class='fraction'>105/139</span>
             </div>
         
             
@@ -477,7 +477,7 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">20x</span>
 <span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -495,7 +495,7 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">20x</span>
-<span class="cline-any cline-yes">167x</span>
+<span class="cline-any cline-yes">190x</span>
 <span class="cline-any cline-yes">20x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -528,10 +528,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -571,21 +571,21 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -780,7 +780,7 @@ webapp.get('/users/getNewMovie', async (req, resp) =&gt; {
   try {
       const allIds = await lib.getMovieIds(db);
       const interactions = await lib.getMovieInteractionsByUser(db, username);
-      const interactedMovies = interactions.map(<span class="fstat-no" title="function not covered" >x </span>=&gt; <span class="cstat-no" title="statement not covered" >x.movie)</span>;
+      const interactedMovies = interactions.map(x =&gt; x.movie);
       const difference = allIds.filter(x =&gt; interactedMovies.indexOf(x) === -1);
       const newMovie = await lib.getMovieByID(db, difference[0]);
       resp.body =  JSON.stringify(newMovie);
@@ -830,11 +830,11 @@ webapp.get('/users/friendsList', async (req, resp) =&gt; {
 });
 &nbsp;
 //add new interaction
-webapp.post('/newInteraction', <span class="fstat-no" title="function not covered" >as</span>ync (req, resp) =&gt; {
-  const { username, movie, interaction } = <span class="cstat-no" title="statement not covered" >req.query;</span>
-<span class="cstat-no" title="statement not covered" >  try {</span>
-<span class="cstat-no" title="statement not covered" >      await lib.newMovieInteract(db, username, movie, interaction);</span>
-<span class="cstat-no" title="statement not covered" >      resp.status(200).json({ message:  "new interaction added"});</span>
+webapp.post('/newInteraction', async (req, resp) =&gt; {
+  const { username, movie, interaction } = req.query;
+  try {
+      await lib.newMovieInteract(db, username, movie, interaction);
+      resp.status(200).json({ message:  "new interaction added"});
       } catch (err) {
 <span class="cstat-no" title="statement not covered" >        resp.status(500).json({ error: 'error creating new interaction' });</span>
       }
@@ -873,22 +873,22 @@ webapp.get('/interactions', async (req, resp) =&gt; {
 //   // }
 // });
 &nbsp;
-webapp.get('/users/friends/:username', <span class="fstat-no" title="function not covered" >as</span>ync (req, resp) =&gt; {
-<span class="cstat-no" title="statement not covered" >  try {</span>
-    const result = <span class="cstat-no" title="statement not covered" >await lib.getFriends(db, req.params.username);</span>
-<span class="cstat-no" title="statement not covered" >    resp.status(200).json({ message: JSON.stringify(result) });</span>
+webapp.get('/users/friends/:username', async (req, resp) =&gt; {
+  try {
+    const result = await lib.getFriends(db, req.params.username);
+    resp.status(200).json({ message: JSON.stringify(result) });
   } catch (err) {
 <span class="cstat-no" title="statement not covered" >    resp.status(500).json({ error: 'error retrieving friends' });</span>
   }
 });
 &nbsp;
-webapp.post('/users/addFriend', <span class="fstat-no" title="function not covered" >as</span>ync (req, resp) =&gt; {
-<span class="cstat-no" title="statement not covered" >  try {</span>
-    const result = <span class="cstat-no" title="statement not covered" >lib.addFriend(db, </span>
+webapp.post('/users/addFriend', async (req, resp) =&gt; {
+  try {
+    const result = lib.addFriend(db, 
       {username: req.body.username1, email: req.body.email1},
       {username: req.body.username2, email: req.body.email2});
-<span class="cstat-no" title="statement not covered" >      resp.status(201).json({ message: `User 1 added User 2 as a friend` }); </span>// make more descriptive message
-<span class="cstat-no" title="statement not covered" >      console.log('friend added');</span>
+      resp.status(201).json({ message: `User 1 added User 2 as a friend` }); // make more descriptive message
+      console.log('friend added');
   } catch (err) {
 <span class="cstat-no" title="statement not covered" >    resp.status(500).json({ error: 'failed to add friend' });</span>
   }
@@ -979,7 +979,7 @@ module.exports = webapp; // export for testing
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Sat May 07 2022 21:54:38 GMT-0400 (Eastern Daylight Time)
+                at Sat May 07 2022 22:12:27 GMT-0400 (Eastern Daylight Time)
             </div>
         <script src="prettify.js"></script>
         <script>

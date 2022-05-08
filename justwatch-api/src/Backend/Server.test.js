@@ -129,20 +129,36 @@ describe('/interactions get endpoint tests',  ()=> {
 });
 
 describe('/newInteraction post endpoint tests',  ()=> {
-    test('/newInteraction endpoint status code and response 404', ()=>{
-        return request(webapp).post('/register')
-        .send({player:'', points:3}).expect(500)
-        .then((response)=> expect(JSON.parse(response.text).error).toBe('try again later'));
-    });
-
-     test('status code 201 and response', () =>{
-        return request(webapp).post('/register')
-        .send(player)
-        .expect(201) // test the response status code
+     test('status code 200 and response', () =>{
+        return request(webapp).post('/newInteraction')
+        .send(db, player.username, movie1, 'like')
+        .expect(200) // test the response status code
          // process the response
-        .then((response)=> expect(JSON.parse(response.text).message).toContain('Player with username'));
+        .then((response)=> expect(JSON.parse(response.text).message).toContain('new interaction added'));
     }); 
 });
+
+describe('/users/friends/:username get endpoint tests',  ()=> {
+    test('/users/friends/:username endpoint status code and response 200', ()=>{
+        return request(webapp).get('/users/friends/:username')
+        .expect(200)
+    });
+});
+
+describe('/users/addFriend post endpoint tests',  ()=> {
+    test('status code 200 and response', () =>{
+        return request(webapp).post('/users/addFriend')
+        .expect(201) // test the response status code
+    }); 
+});
+
+describe('/messages get endpoint tests',  ()=> {
+    test('status code 200 and response', () =>{
+        return request(webapp).get('/messages')
+        .expect(200) // test the response status code
+    }); 
+});
+
 
 
 
