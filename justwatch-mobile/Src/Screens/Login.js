@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
 import { getUser } from '../Services/fetcher';
-import { setLoggedInUser } from '../Modules/LoginLocalStorage';
+import { setLoggedInUser, getL } from '../Modules/LoginLocalStorage';
 import {
   View,
   StyleSheet,

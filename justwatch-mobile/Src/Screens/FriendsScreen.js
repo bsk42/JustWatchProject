@@ -43,10 +43,14 @@ import {
 
 function FriendsScreen({ navigation }) {
 
-
-    function goToMessage() {
-       // navigator('/messaging');
+  
+    function goToMessage(e) {
+      console.log(e);
+      navigation.navigate("MessagingScreen", {
+        to: e
+      });
     }
+    
 
     const [friendsList, setFriendsList] = useState([{
         _id: "6275db4460226a7666661363",
@@ -76,15 +80,6 @@ function FriendsScreen({ navigation }) {
         getFriendsList().then((data) => setFriendsList(data));
     }, []);
 
-    // let mounted = true;
-    //     getFriendsList()
-    //     .then((data) => {
-    //         if (mounted) {
-    //           setFriendsList(data);
-    //         }
-    //     })
-    //     .catch((err) => console.log(err));
-    //     return () => mounted = false;
 
 
     return (
@@ -99,7 +94,7 @@ function FriendsScreen({ navigation }) {
                 <Text style={{fontSize: 16, fontWeight: "bold", padding: 5}}>{`${item.username}`}</Text>
                 <Text style={{padding: 5}}>{`Number likes in common: ${item.numMatches}`}</Text>
                 <Text style={{padding: 5}}>{`Movies in common: ${item.movieMatches}`}</Text>
-                <Button title="Message"/>
+                <Button title="Message" onPress={() => goToMessage(item.username)}/>
               </View>
             )}
             keyExtractor={(item) => item._id}
@@ -111,30 +106,4 @@ function FriendsScreen({ navigation }) {
 
 }
 
- // <div className="div">
-        //     <div className="users">
-        //         <div className="users-container"> 
-        //             <ul>
-        //                 { friendsList.map(user => 
-        //                     <li key={user._id} className="user">
-        //                         <div className="user-info-container">
-        //                             <div className="user-info">
-        //                                 <h4>{user.name}</h4>
-        //                                 <p>Email: {user.email}</p>
-        //                                 <p>Number Matches: {user.numMatches}</p>
-        //                                 <p>Movies you both like: {user.movieMatches}</p>
-        //                             </div>
-        //                             <div className="user-action">
-        //                                 <button className="messageButton" onClick={goToMessage}>Message</button>
-        //                             </div>
-        //                         </div>
-        //                     </li>
-        //                 )}
-        //             </ul>
-        //             <div className="chatbox-container">
-        //             <div id="talkjs-container" style={{height: "300px"}}></div>
-        //             </div>
-        //         </div>
-        //     </div>
-        // </div>
 export default FriendsScreen;
