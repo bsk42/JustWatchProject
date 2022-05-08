@@ -1,6 +1,8 @@
 import './Profile.css';
+import { getLoggedInUser } from '../Modules/LoginLocalStorage';
 
-function Profile({ name, username, email}) {
+
+function Profile() {
 
   return (
     <div className="Profile">
@@ -8,15 +10,15 @@ function Profile({ name, username, email}) {
         <h1>
           Profile
         </h1>
-        <h4>
-            Name: {name}
-        </h4>
-        <h4>
-            Username: {username}
-        </h4>
-        <h4>
-            Email: {email}
-        </h4>
+        <h3>
+            Name: {getLoggedInUser().name}
+        </h3>
+        <h3>
+            Username: {getLoggedInUser().username}
+        </h3>
+        <h3>
+            Email: {getLoggedInUser().email}
+        </h3>
   
       </header>
       
