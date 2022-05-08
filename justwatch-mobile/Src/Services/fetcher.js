@@ -1,12 +1,11 @@
 import { getLoggedInUser } from '../Modules/LoginLocalStorage';
 
 const hostUrl = 'http://127.0.0.1:5005'
-//const hostUrl = 'http://localhost:5005'
 
 
 async function getNewMovie() {
   try{
-    const user = await getLoggedInUser();
+    const user = getLoggedInUser();
       const response = await fetch(`${hostUrl}/users/getNewMovie?username=${user.username}`, 
       {
         method: 'GET',
@@ -34,7 +33,7 @@ async function getNewMovie() {
 
 async function interactWithMovie(movie, interaction) {
   try{
-    const user = await getLoggedInUser();
+    const user = getLoggedInUser();
       await fetch(`${hostUrl}/newInteraction?username=${user.username}&movie=${movie}&interaction=${interaction}`, {method: 'POST'});
   }catch(error) {
       console.log(error);
@@ -43,9 +42,11 @@ async function interactWithMovie(movie, interaction) {
 
 async function getFriendsList() {
   try{
-    const user = await  getLoggedInUser();
+    const user = getLoggedInUser();
+
       const response = await fetch(`${hostUrl}/users/friendsList?username=${user.username}`, {method: 'GET'});
       const data =  await response.json();
+      console.log('friends list');
       console.log(data);
       return data.data;
   }catch(error) {
@@ -144,7 +145,46 @@ const updateScore = async (player, points) => {
     }),
   });
   return res.json();
+
+  
 }
+
+
+// retrieves all the messages
+const getMessages = async (from, to) =>{
+  
+  try{
+      //console.log('getting messages fetcher');
+      const response = await fetch(`${hostUrl}/messages?username1=${from}&username2=${to}`, {
+        method: 'GET',
+        mode: 'cors'
+      });
+      let data = await response.json();
+      console.log(data);
+      return data.messages;
+  }
+  catch(err){
+      return 'error'; // return  error
+  }
+}
+
+// send a message to the server
+const sendMessage = async (from, to, content) =>{
+  const res = await fetch(`${hostUrl}/messages`, {
+    method: 'POST',
+    body: JSON.stringify({
+      from, 
+      to,
+      content,
+    }),
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+  });
+  return res.json();
+}
+
 
 export {
   register,
@@ -155,6 +195,8 @@ export {
   updateScore,
   getNewMovie,
   interactWithMovie,
+  getMessages,
+  sendMessage,
   getInteractions,
   getUsers,
   getFriendsList
