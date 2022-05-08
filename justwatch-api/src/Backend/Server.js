@@ -249,12 +249,12 @@ webapp.delete('/delete/:player', async (req, resp) => {
 // messages endpoint - returns all the messages
 webapp.get('/messages', async (req, resp) =>{
     try {
-
-      console.log('getting messages server');
-      //console.log(req.params.username1);
       await lib.startConversation(db, req.query.username1, req.query.username2);
+      //console.log('server fetch messages')
       const result = await lib.fetchMessages(db, req.query.username1, req.query.username2);
-      resp.status(200).json({message: JSON.stringify(result)});
+      console.log(result);
+      resp.status(200).json({messages: result});
+      return result;
     } catch (err) {
       resp.status(500).json({ error: 'try again later' });
  }});
@@ -263,16 +263,13 @@ webapp.get('/messages', async (req, resp) =>{
 // message format: from/to/content
 webapp.post('/messages', async (req, resp) =>{
     //check the body
+    //console.log('sending message');
     if(!req.body.from || !req.body.to || !req.body.content){
         resp.status(400).json({error: 'missing message field(s)'});
         return;
     }
     //add the message to the list 
-    await lib.sendMessage(db, req.body.from, req.body.to,{
-      from: req.body.from,
-      to:req.body.to,
-      content:req.body.content,
-    });
+    await lib.sendMessage(db, req.body.from, req.body.to,req.body.content);
   
     resp.status(201).json({receipt: 'ok'});
 });

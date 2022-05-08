@@ -16,10 +16,9 @@ function Messaging(props) {
 
   useEffect(() =>{
     async function fetchmessages(){
-      const mesgs = await getMessages(from, to);
-      console.log(from);
-      // update the state
-      setmessages(mesgs);
+      let result = await getMessages(from, to);
+      console.log('messages FE')
+      console.log(result);
     }
 
     // we want to fetch the users frequently (5 s)
@@ -28,7 +27,7 @@ function Messaging(props) {
       fetchmessages();
     }, 5000);
     
-  });
+  }, []);
 
   const handleSendMessage = async(e) =>{
     e.preventDefault();
@@ -38,7 +37,8 @@ function Messaging(props) {
   
 
   return (
-    <div>
+    <div className="div">
+      <div className = "chat">
     <div>
       <h2>Previous Messages</h2>
       <div>{messages.map( msg => <p>{JSON.stringify(msg)}</p>)}</div>
@@ -47,6 +47,7 @@ function Messaging(props) {
     <h2>New Message</h2>
     <textarea  cols="15" rows="5"  onChange={(e) => content.current = e.target.value}/>
     <button type="button" onClick={(e) => handleSendMessage(e)}>Send</button>
+  </div>
   </div>
     /*
     <div className="div">
