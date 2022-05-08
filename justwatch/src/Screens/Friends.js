@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import './Friends.css'
-import Talk from "talkjs";
-import { useNavigate } from 'react-router-dom';
+
+import { useNavigate, useLocation } from 'react-router-dom';
 import { getFriendsList } from '../Services/fetcher';
 import { dummyUsers } from './Users';
 import "regenerator-runtime/runtime.js";
@@ -9,10 +9,13 @@ import "regenerator-runtime/runtime.js";
 function Friends() {
 
     const navigator = useNavigate();
-
-    function goToMessage() {
-        navigator('/messaging');
+    
+    function goToMessage(user) {
+        navigator('/messaging', {state: {
+            username: user.username,
+        }});
     }
+    
 
     const [friendsList, setFriendsList] = useState([{
         _id: "6275db4460226a7666661363",
@@ -68,7 +71,7 @@ function Friends() {
                                         <p>Movies you both like: {user.movieMatches}</p>
                                     </div>
                                     <div className="user-action">
-                                        <button className="messageButton" onClick={goToMessage}>Message</button>
+                                        <button className="messageButton" onClick={() => goToMessage(user)}>Message</button>
                                     </div>
                                 </div>
                             </li>

@@ -40,7 +40,6 @@ async function register(db, newUser){
     } catch (err) {
         throw new Error('could not add a player');
     }
-        
 };
 
 async function getUsers(db) {
@@ -126,6 +125,39 @@ async function addFriend(db, user1, user2) {
     }
 }
 
+async function startConversation(db, user1, user2) {
+  try {
+      const result = await db.collection('Messages').findOne({users: {$all: [user1, user2]}});
+      if (result == null) {
+      const {insertedId} =  await db.collection('Messages').insertOne({users: [user1, user2], content:[] });
+      return insertedId;
+      }
+  } catch (err) {
+  }
+}
+
+async function fetchMessages(db, user1, user2) {
+  try {
+    //console.log('fetching messages');
+    const results = await db.collection('Messages').findOne({users: {$all: [user1, user2]}});
+    //console.log(results);
+    return results.content;
+  } catch (err) {
+
+  }
+}
+
+async function sendMessage(db, user1, user2, message) {
+  try {
+    const results = await db.collection('Messages').findOne({users: {$all: [user1, user2]}});
+    const messages = results.content;
+    //console.log(messages);
+    messages.push(message);
+    await db.collection('Messages').findOneAndReplace({users: {$all: [user1, user2]}}, {users: [user1, user2], content: messages});
+  } catch (err) {
+  }
+}
+    
 async function getInteractions(db) {
   try {
     return await db.collection('Interactions').find({}).toArray();
@@ -179,7 +211,11 @@ module.exports = {
   getMovieInteractionsByUser,
   getMovieIds,
   getLikesByUser,
-  getInteractions
+  getInteractions,
+  startConversation,
+  sendMessage,
+  fetchMessages,
+  getUsers
 };
 
 connect('mongodb+srv://cis350Final:cis350Final@cluster0.gq1yt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority');

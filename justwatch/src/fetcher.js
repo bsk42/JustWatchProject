@@ -1,3 +1,5 @@
+
+
 const hostUrl = 'http://localhost:5005'
 
 const register = async (username, name, email, password) => {
@@ -44,6 +46,10 @@ const updateScore = async (player, points) => {
   });
   return res.json();
 }
+
+
+
+
 
 export {
   register,
