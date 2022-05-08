@@ -32,22 +32,25 @@
     expect(linkElement).toBeInTheDocument();
 })
 
-// test('input fields should be filled correctly', () => {
-//   render(<Register />);
+test('input fields should be filled correctly', () => {
+  render(<Register />);
 
-//   const usernameTextBox = screen.getByRole("textbox", {
-//     name: /Username/i,
-//   });
-//   userEvent.type(usernameTextBox, "kush1234");
+  const usernameTextBox = screen.getByRole("textbox", {
+    name: /Username/i,
+  });
+  userEvent.type(usernameTextBox, "kush1234");
 
-//   const emailTextBox = screen.getByRole("textbox", {
-//     name: /Email/i,
-//   });
-//   userEvent.type(emailTextBox, "kp@justwatch.com");
+  const emailTextBox = screen.getByRole("textbox", {
+    name: /Email/i,
+  });
+  userEvent.type(emailTextBox, "kp@justwatch.com");
 
-//   const linkElement = screen.getAllByRole("textbox");
+  const linkElement = screen.getAllByRole("textbox");
 
-//   userEvent.type(linkElement[0], "Kush P");
-//   userEvent.type(linkElement[3], "Kush1234");
+  userEvent.type(linkElement[0], "Kush P");
+  userEvent.type(linkElement[3], "Kush1234");
+    // userEvent.click(screen.getByText("Register"));
 
-// });
+
+
+});

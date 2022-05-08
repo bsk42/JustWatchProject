@@ -52,11 +52,6 @@ test('input fields should be filled correctly', () => {
   userEvent.type(loginTextBox, "kush1234");
 
    const linkElement = screen.getByText("Password");
-  // console.log(loginTextBox);
-
-  //   const loginTextBox2 = screen.getByText("password", {
-  //   name: /Password/i,
-  // });
 
    userEvent.type(linkElement[1], "kush1234");
   userEvent.click(screen.getByText("Login"));
