@@ -30,5 +30,7 @@ test('Reviews', () => {
 test('click', () => {
     render(<Movieselection />);
     // userEvent.click(screen.getByText("Leaderboard"));
+      userEvent.click(screen.getByText("Like"));
+
     expect(screen.getByText(/Reviews/i)).toBeVisible();
 })
