@@ -2,7 +2,7 @@
 const request = require('supertest');
 
 // import our web app
-const webapp = require('./server');
+const webapp = require('./Server');
 
 // Import database operations
 const dbModule = require('./dbOperations');
