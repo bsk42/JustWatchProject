@@ -17,8 +17,7 @@
     "react-scripts": "5.0.0",
     "regenerator-runtime": "^0.13.9",
     "talkjs": "^0.15.3",
-    "web-vitals": "^2.1.4",
-    "proxy": "http://localhost:5005"
+    "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
