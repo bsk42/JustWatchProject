@@ -1,4 +1,4 @@
-import face from '../Assets/Face.jpg';
+// import face from '../Assets/Face.jpg';
 import './Profile.css';
 import TagsInput from "../Components/TagsInput"
 
@@ -10,7 +10,6 @@ function Profile({ name, username, genre, streamingServices}) {
   return (
     <div className="Profile">
       <header className="Profile-header">
-        <img src={face} className="Profile-logo" alt="logo" />
         <h1>
           Profile
         </h1>

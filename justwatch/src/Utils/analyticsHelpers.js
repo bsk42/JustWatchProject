@@ -22,7 +22,7 @@ export async function getAllUserStats(allInteractions, allUsers) {
 }]
 */
 
-function getAvgValue(arr, prop) {
+export function getAvgValue(arr, prop) {
   console.log(arr);
   return Math.round((arr.reduce((total, next) => total + next[prop], 0) / arr.length) * 100) / 100;
 }
