@@ -82,3 +82,8 @@ afterAll(() => {
     const json = await fetcher.updateScore();
     expect(json).toEqual([]);
 }); 
+
+    test('update score', async () => {
+    const json = await fetcher.interactWithMovie();
+    expect(json).toEqual(undefined);
+}); 

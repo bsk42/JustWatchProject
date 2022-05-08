@@ -10,26 +10,23 @@
 
  test('Superlike', () => {
     render(<Movieselection />);
-    // userEvent.click(screen.getByText("Leaderboard"));
     expect(screen.getByText(/Superlike/i)).toBeVisible();
 })
 
 
 test('Dislike', () => {
     render(<Movieselection />);
-    // userEvent.click(screen.getByText("Leaderboard"));
     expect(screen.getByText(/Dislike/i)).toBeVisible();
 })
 
 test('Reviews', () => {
     render(<Movieselection />);
-    // userEvent.click(screen.getByText("Leaderboard"));
     expect(screen.getByText(/Reviews/i)).toBeVisible();
 })
 
 test('click like', () => {
     render(<Movieselection />);
-    // userEvent.click(screen.getByText("Leaderboard"));
+    
      userEvent.click(screen.getByText("Like"));
 
     expect(screen.getByText(/Dislike/i)).toBeVisible();

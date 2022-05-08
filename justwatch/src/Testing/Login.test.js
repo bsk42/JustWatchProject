@@ -51,11 +51,17 @@ test('input fields should be filled correctly', () => {
 
   userEvent.type(loginTextBox, "kush1234");
 
-  const linkElement = screen.getAllByRole("textbox");
+  // const linkElement = screen.getByText("Password");
+  // console.log(loginTextBox);
 
-  userEvent.type(linkElement[1], "kush1234");
+  //   const loginTextBox2 = screen.getByText("password", {
+  //   name: /Password/i,
+  // });
+
+  // userEvent.type(linkElement[1], "kush1234");
   userEvent.click(screen.getByText("Login"));
-  
+  const linkElement2 = screen.getByText(/Login/i);
+  expect(linkElement2).toBeInTheDocument();
 
 });
 
