@@ -19,6 +19,7 @@ function Messaging(props) {
       let result = await getMessages(from, to);
       console.log('messages FE')
       console.log(result);
+      setmessages(result);
     }
 
     // we want to fetch the users frequently (5 s)
@@ -41,7 +42,18 @@ function Messaging(props) {
       <div className = "chat">
     <div>
       <h2>Previous Messages</h2>
-      <div>{messages.map( msg => <p>{JSON.stringify(msg)}</p>)}</div>
+      <ul>
+                        { messages.map(message => 
+                            <li>
+                                <div>
+                                  {message.sender}
+                                </div>
+                                <div>
+                                  {message.message}
+                                </div>
+                            </li>
+                        )}
+                    </ul>
       <hr />
     </div>
     <h2>New Message</h2>
