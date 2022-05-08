@@ -5,7 +5,7 @@ const hostUrl = 'http://127.0.0.1:5005'
 
 async function getNewMovie() {
   try{
-    const user = getLoggedInUser();
+    const user = await getLoggedInUser();
       const response = await fetch(`${hostUrl}/users/getNewMovie?username=${user.username}`, 
       {
         method: 'GET',
@@ -33,7 +33,7 @@ async function getNewMovie() {
 
 async function interactWithMovie(movie, interaction) {
   try{
-    const user = getLoggedInUser();
+    const user = await getLoggedInUser();
       await fetch(`${hostUrl}/newInteraction?username=${user.username}&movie=${movie}&interaction=${interaction}`, {method: 'POST'});
   }catch(error) {
       console.log(error);
@@ -42,7 +42,7 @@ async function interactWithMovie(movie, interaction) {
 
 async function getFriendsList() {
   try{
-    const user = getLoggedInUser();
+    const user = await getLoggedInUser();
 
       const response = await fetch(`${hostUrl}/users/friendsList?username=${user.username}`, {method: 'GET'});
       const data =  await response.json();
