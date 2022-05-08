@@ -3,7 +3,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "npx jest --forceExit --coverage",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "heroku-postbuild": "cd justwatch && npm install && npm run build"
   },
   "devDependencies": {
     "@babel/plugin-syntax-jsx": "^7.16.7",
