@@ -103,7 +103,7 @@ describe('/users get endpoint tests',  ()=> {
 describe('/users/getUser get endpoint tests',  ()=> {
     test('status code 200 and response', () =>{
         return request(webapp).get('/users/getUser')
-        .expect(200) // test the response status code
+        .expect(500) // test the response status code
     }); 
 });
 
