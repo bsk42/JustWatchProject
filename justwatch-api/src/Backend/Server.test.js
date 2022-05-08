@@ -2,7 +2,7 @@
 const request = require('supertest');
 
 // import our web app
-const webapp = require('./server');
+const webapp = require('./Server');
 
 // Import database operations
 const dbModule = require('./dbOperations');
@@ -101,7 +101,7 @@ describe('/users get endpoint tests',  ()=> {
 });
 
 describe('/users/getUser get endpoint tests',  ()=> {
-    test('status code 200 and response', () =>{
+    test('status code 500 and response', () =>{
         return request(webapp).get('/users/getUser')
         .expect(500) // test the response status code
     }); 

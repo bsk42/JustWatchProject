@@ -34,10 +34,6 @@ function Login() {
 
   return (
     <div className="div">
-      <div className="div-2">
-        <div className="builder-columns div-3">
-        </div>
-      </div>
       <form className="form">
         <label>
           Username
