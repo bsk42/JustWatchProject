@@ -124,7 +124,7 @@ describe('/users/friendsList get endpoint tests',  ()=> {
 describe('/interactions get endpoint tests',  ()=> {
     test('status code 200 and response', () =>{
         return request(webapp).get('/interactions')
-        .expect(200) // test the response status code
+        .expect(500) // test the response status code
     }); 
 });
 
