@@ -12,22 +12,19 @@ function Messaging(props) {
 
   // state for the messages
   const [messages, setmessages] = useState([]);
-  let currentMessages = useRef('');
+  let [firstOpen, setFirstOpen] = useState(true);
 
   useEffect(() =>{
     async function fetchmessages(){
       let result = await getMessages(from, to);
       //console.log('messages FE')
      // console.log(result);
+     if (messages !== result && firstOpen === false){
+      alert('You got a new message');
+     }
+      setFirstOpen(false);
       setmessages(result);
-
-      if (messages !== currentMessages.current) {
-        currentMessages.current = messages;
-        alert('YOU GOT A NEW MESSAGE');
-      }
-
     }
-
     // we want to fetch the users frequently (5 s)
     //we will use server polling with setInterval
     setInterval(() => {
