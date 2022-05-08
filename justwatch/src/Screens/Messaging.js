@@ -35,28 +35,28 @@ function Messaging(props) {
     await sendMessage(from, to, {sender: from, message: content.current});
   }
 
+  function whoMessage(sender) {
+    if (sender === getLoggedInUser().username) {
+      return 'mine messages';
+    } else {
+      return 'yours messages';
+    }
+  }
   
 
   return (
     <div className="div">
       <div className = "chat">
     <div>
-      <h2>Previous Messages</h2>
-      <ul>
-                        { messages.map(message => 
-                            <li>
-                                <div>
-                                  {message.sender}
-                                </div>
-                                <div>
-                                  {message.message}
-                                </div>
-                            </li>
-                        )}
-                    </ul>
+          { messages.map(message => 
+              <div className={whoMessage(message.sender)}>
+              <div className="message last">
+                {message.message}
+              </div>
+            </div>
+          )}
       <hr />
     </div>
-    <h2>New Message</h2>
     <textarea  cols="15" rows="5"  onChange={(e) => content.current = e.target.value}/>
     <button type="button" onClick={(e) => handleSendMessage(e)}>Send</button>
   </div>
