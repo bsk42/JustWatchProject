@@ -5,6 +5,8 @@
  import '@testing-library/jest-dom/extend-expect';
  import '@testing-library/jest-dom';
  import Movieselection from '../Screens/Movieselection';
+  import userEvent from '@testing-library/user-event'
+
 
  test('Superlike', () => {
     render(<Movieselection />);
@@ -20,6 +22,12 @@ test('Dislike', () => {
 })
 
 test('Reviews', () => {
+    render(<Movieselection />);
+    // userEvent.click(screen.getByText("Leaderboard"));
+    expect(screen.getByText(/Reviews/i)).toBeVisible();
+})
+
+test('click', () => {
     render(<Movieselection />);
     // userEvent.click(screen.getByText("Leaderboard"));
     expect(screen.getByText(/Reviews/i)).toBeVisible();
