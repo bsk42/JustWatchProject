@@ -75,7 +75,7 @@ test('input fields should not be filled correctly', () => {
   const linkElement = screen.getAllByRole("textbox");
 
   userEvent.type(linkElement[1], "");
-  userEvent.click(screen.getByText("Login"));
+  // userEvent.click(screen.getByText("Login"));
 
 });
 
