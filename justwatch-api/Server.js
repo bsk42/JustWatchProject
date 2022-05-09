@@ -6,7 +6,7 @@ const cors = require('cors');
 const webapp = express();
 
 // import database functions
-const lib = require('./dbOperations');
+const lib = require('./src/Backend/dbOperations');
 const { json } = require('body-parser');
 
 const url = 'mongodb+srv://cis350Final:cis350Final@cluster0.gq1yt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
@@ -290,7 +290,7 @@ webapp.use((_req, res) => {
 });
 
 // Start server
-const port = process.env.PORT || 5005;
+const port = 8000; //process.env.PORT || 
 webapp.listen(port, async () => {
   try {
     db = await lib.connect(url);
