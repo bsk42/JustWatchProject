@@ -2,7 +2,7 @@
   "name": "express-ads-api",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "Server.js",
   "scripts": {
     "test": "npx jest"
   },
@@ -17,6 +17,7 @@
     "mongodb": "^4.4.1",
     "mongodb-memory-server": "^8.4.1",
     "morgan": "^1.10.0",
+    "react-scripts": "^5.0.1",
     "supertest": "^6.2.3"
   },
   "engines": {
