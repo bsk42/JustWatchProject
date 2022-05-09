@@ -1,6 +1,6 @@
 
 
-const hostUrl = 'http://localhost:5005'
+const hostUrl = 'https://powerful-reaches-01306.herokuapp.com'
 
 const register = async (username, name, email, password) => {
   const res = await fetch(`${hostUrl}/register`, {

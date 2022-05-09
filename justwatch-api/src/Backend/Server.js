@@ -19,7 +19,7 @@ webapp.use(
     extended: true,
   }),
 );
-webapp.use(cors({ credentials: true, origin: ['http://localhost:5005'] }));
+webapp.use(cors({ credentials: true, origin: ['https://powerful-reaches-01306.herokuapp.com'] }));
 
 // Root endpoint
 webapp.get('/', (req, res) => {
