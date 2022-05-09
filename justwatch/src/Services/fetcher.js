@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { getLoggedInUser } from '../Modules/LoginLocalStorage';
 
-const hostUrl = 'http://127.0.0.1:5005'
+const hostUrl = 'https://powerful-reaches-01306.herokuapp.com'
 
 
 async function getNewMovie() {
